@@ -108,11 +108,11 @@ $ yarn queue
 ```
 
 ## :paperclip: Arquivos
-:pushpin: [Insomnia](https://github.com/dhemesmota/gympoint/blob/master/Insomnia.json): arquivo contendo rotas da aplicação, 
+:pushpin: [Insomnia](https://github.com/dhemesmota/gympoint/blob/master/backend/Insomnia.json): arquivo contendo rotas da aplicação, 
 deve ser importado no Insominia, se não tiver, bastar instalar em seu computador. [Link para download](https://insomnia.rest).
 
 ## :memo: Licença
-Esse projeto está sob a licença MIT. Veja o arquivo [Licença](https://github.com/dhemesmota/gympoint/blob/master/LICENSE.md) 
+Esse projeto está sob a licença MIT. Veja o arquivo [Licença](https://github.com/dhemesmota/gympoint/blob/master/LICENSE) 
 para mais detalhes.
 
 [reactjs]: https://pt-br.reactjs.org/
