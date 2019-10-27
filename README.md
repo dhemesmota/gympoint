@@ -33,12 +33,9 @@
 
 Este projeto está sendo desenvolvido com as seguintes tecnologias:
 
-- [ ] [ReactJS][reactjs]
-- [ ] [React Native][react-native]
-- [x] [Node.JS][nodejs]
-
-## :wrench: Ferramentas
-
+- [ReactJS][reactjs]
+- [React Native][react-native]
+- [Node.JS][nodejs]
 - [Sentry Node][sentrynode]
 - [Bcryptjs][bcryptjs]
 - [Bee Queue][bee-queue]
@@ -56,6 +53,13 @@ Este projeto está sendo desenvolvido com as seguintes tecnologias:
 - [Nodemon][nodemon]
 - [Sucrase][sucrase]
 - [...][...]
+
+## :wrench: Ferramentas
+
+- [Postbird][postbird]
+- [Insomnia][insomnia]
+- [MongoDB Compass][mongodb-compass]
+- [Docker][docker]
 
 
 ## :clipboard: Funcionalidades
@@ -140,3 +144,7 @@ para mais detalhes.
 [sucrase]: https://github.com/alangpierce/sucrase
 [...]: https://github.com/dhemesmota/gympoint
 
+[postbird]: https://electronjs.org/apps/postbird
+[mongodb-compass]: https://www.mongodb.com/products/compass
+[insomnia]: https://insomnia.rest
+[docker]: https://docs.docker.com/docker-for-windows/install/
