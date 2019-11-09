@@ -9,11 +9,14 @@ class Enrollment extends Model {
         end_date: Sequelize.DATE,
         price: Sequelize.FLOAT,
         active: {
-          type: Sequelize.VIRTUAL,
+          type: Sequelize.VIRTUAL(Sequelize.BOOLEAN, [
+            'start_date',
+            'end_date',
+          ]),
           get() {
             return (
-              isAfter(new Date(), this.start_date) &&
-              isBefore(new Date(), this.end_date)
+              isBefore(this.get('start_date'), new Date()) &&
+              isAfter(this.get('end_date'), new Date())
             );
           },
         },

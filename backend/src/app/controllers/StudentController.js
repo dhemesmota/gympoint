@@ -1,13 +1,16 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 import Student from '../models/Student';
 
 class StudentController {
   async index(req, res) {
     const { page = 1 } = req.query;
+    const { q = '' } = req.query;
 
     const limit = 20;
 
     const students = await Student.findAll({
+      where: { name: { [Op.like]: `%${q}%` } },
       order: ['name'],
       limit,
       offset: (page - 1) * limit,
