@@ -7,14 +7,18 @@
     "prop-types": "^15.7.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-perfect-scrollbar": "^1.5.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
-    "reactotron-react-js": "^3.3.6"
+    "react-select": "^3.0.8",
+    "react-toastify": "^5.4.0",
+    "reactotron-react-js": "^3.3.6",
+    "styled-components": "^4.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -46,6 +50,6 @@
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^2.2.0",
     "prettier": "^1.18.2",
-    "react-app-rewired": "^2.1.4"
+    "react-app-rewired": "^2.1.5"
   }
 }

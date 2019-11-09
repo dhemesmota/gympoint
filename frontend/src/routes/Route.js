@@ -2,12 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
+import PerfectScrollbar from 'react-perfect-scrollbar';
+
+import AuthLayout from '~/pages/_layouts/auth';
+import DefaultLayout from '~/pages/_layouts/default';
+
 export default function RouteWrapper({
   component: Component,
   isPrivate,
   ...rest
 }) {
-  const signed = false;
+  const signed = true;
 
   if (!signed && isPrivate) {
     return <Redirect to="/" />;
@@ -17,8 +22,20 @@ export default function RouteWrapper({
     return <Redirect to="/dashboard" />;
   }
 
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  return <Route {...rest} component={Component} />;
+  const Layout = signed ? DefaultLayout : AuthLayout;
+
+  return (
+    <Route
+      {...rest}
+      render={props => (
+        <PerfectScrollbar>
+          <Layout>
+            <Component {...props} />
+          </Layout>
+        </PerfectScrollbar>
+      )}
+    />
+  );
 }
 
 RouteWrapper.propTypes = {
