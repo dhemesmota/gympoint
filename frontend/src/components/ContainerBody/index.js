@@ -45,6 +45,11 @@ const ContainerBody = styled.div`
       }
     }
   }
+
+  table tbody tr:last-child td {
+    padding: 16px 0 0 0;
+    border: none;
+  }
 `;
 
 export default ContainerBody;
