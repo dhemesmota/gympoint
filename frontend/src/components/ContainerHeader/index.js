@@ -57,6 +57,31 @@ const ContainerHeader = styled.div`
       margin-left: 16px;
     }
   }
+
+  span {
+    position: relative;
+    margin-left: 16px;
+
+    input {
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      padding: 10px 16px 10px 40px;
+      height: 36px;
+      color: #444;
+
+      &::placeholder {
+        font-size: 1.4rem;
+        color: #999;
+      }
+    }
+
+    label {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      cursor: pointer;
+    }
+  }
 `;
 
 export default ContainerHeader;

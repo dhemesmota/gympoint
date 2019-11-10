@@ -7,6 +7,44 @@ const ContainerBody = styled.div`
 
   display: flex;
   flex-direction: column;
+
+  table {
+    border-spacing: 0;
+  }
+
+  table thead tr th {
+    text-align: left;
+    color: #444;
+  }
+
+  table tbody tr td {
+    text-align: left;
+    color: #666;
+    padding: 16px 0;
+
+    border-bottom: 1px solid #eee;
+
+    span {
+      display: flex;
+      justify-content: flex-end;
+      button {
+        border: 0;
+        background: transparent;
+
+        & + button {
+          margin-left: 23px;
+        }
+
+        &.edit {
+          color: #4d85ee;
+        }
+
+        &.delete {
+          color: #de3b3b;
+        }
+      }
+    }
+  }
 `;
 
 export default ContainerBody;
