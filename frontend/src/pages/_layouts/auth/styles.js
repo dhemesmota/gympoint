@@ -24,7 +24,7 @@ export const Content = styled.div`
 
   img {
     height: 100px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
 
   form {
@@ -36,6 +36,7 @@ export const Content = styled.div`
       font-weight: bold;
       color: #444;
       margin-bottom: 8px;
+      margin-top: 20px;
     }
 
     input {
@@ -44,10 +45,20 @@ export const Content = styled.div`
       border-radius: 4px;
       height: 45px;
       padding: 13px 15px;
-      margin-bottom: 20px;
+
+      &::placeholder {
+        font-size: 16px;
+        color: #999;
+      }
+    }
+
+    span {
+      margin-top: 4px;
+      color: #ee4d64;
     }
 
     button {
+      margin-top: 20px;
       padding-top: 4px;
       background: #ee4d64;
       border: 0;
