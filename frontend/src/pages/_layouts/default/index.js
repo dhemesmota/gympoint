@@ -5,10 +5,10 @@ import { Wrapper, Content } from './styles';
 
 import Header from '~/components/Header';
 
-export default function DefaultLayout({ children }) {
+export default function DefaultLayout({ children, active }) {
   return (
     <Wrapper>
-      <Header />
+      <Header activedMenu={active} />
       <Content>{children}</Content>
     </Wrapper>
   );
@@ -16,4 +16,5 @@ export default function DefaultLayout({ children }) {
 
 DefaultLayout.propTypes = {
   children: PropTypes.element.isRequired,
+  active: PropTypes.string.isRequired,
 };

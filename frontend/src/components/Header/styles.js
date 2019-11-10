@@ -27,14 +27,38 @@ export const Content = styled.div`
       font-weight: bold;
       color: #999;
       font-size: 1.5rem;
+      transition: all 0.2s;
+      position: relative;
 
       &.active {
         color: #444;
+
+        &::after {
+          position: absolute;
+          content: '';
+          height: 2px;
+          width: 100%;
+          background: #d23b3b;
+          bottom: -22px;
+          left: 0;
+          animation-name: linewidth;
+          animation-duration: 0.3s;
+          animation-timing-function: ease-in-out;
+        }
       }
     }
 
     a + a {
       margin-left: 20px;
+    }
+  }
+
+  @keyframes linewidth {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
     }
   }
 `;

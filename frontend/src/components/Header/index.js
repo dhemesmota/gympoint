@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -8,9 +9,17 @@ import { signOut } from '~/store/modules/auth/actions';
 
 import logo from '~/assets/logo-horizontal.svg';
 
-export default function Header() {
+export default function Header({ activedMenu }) {
   const dispatch = useDispatch();
   const { profile } = useSelector(state => state.user);
+
+  const menus = [
+    { title: 'DASHBOARD', route: 'dashboard' },
+    { title: 'ALUNOS', route: 'students' },
+    { title: 'PLANOS', route: 'plans' },
+    { title: 'MATRÍCULAS', route: 'enrollments' },
+    { title: 'PEDIDOS DE AUXÍLIO', route: 'questions' },
+  ];
 
   function handleSignOut() {
     dispatch(signOut());
@@ -22,13 +31,16 @@ export default function Header() {
         <nav>
           <img src={logo} alt="GymPoint" />
 
-          <Link to="/dashboard" className="active">
-            DASHBOARD
-          </Link>
-          <Link to="/dashboard">ALUNOS</Link>
-          <Link to="/dashboard">PLANOS</Link>
-          <Link to="/dashboard">MATRÍCULAS</Link>
-          <Link to="/dashboard">PEDIDOS DE AUXÍLIO</Link>
+          {menus &&
+            menus.map(menu => (
+              <Link
+                key={menu.route}
+                to={`/${menu.route}`}
+                className={menu.route === activedMenu ? 'active' : ''}
+              >
+                {menu.title}
+              </Link>
+            ))}
         </nav>
 
         <aside>
@@ -43,3 +55,7 @@ export default function Header() {
     </Container>
   );
 }
+
+Header.propTypes = {
+  activedMenu: PropTypes.string.isRequired,
+};

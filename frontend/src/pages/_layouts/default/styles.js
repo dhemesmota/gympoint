@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  background: #eee;
+  background: #f2f2f2;
   height: 100%;
 `;
 

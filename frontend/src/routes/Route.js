@@ -12,6 +12,7 @@ import { store } from '~/store';
 export default function RouteWrapper({
   component: Component,
   isPrivate,
+  menu,
   ...rest
 }) {
   const { signed } = store.getState().auth;
@@ -31,7 +32,7 @@ export default function RouteWrapper({
       {...rest}
       render={props => (
         <PerfectScrollbar>
-          <Layout>
+          <Layout active={menu}>
             <Component {...props} />
           </Layout>
         </PerfectScrollbar>
@@ -44,8 +45,10 @@ RouteWrapper.propTypes = {
   isPrivate: PropTypes.bool,
   component: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
     .isRequired,
+  menu: PropTypes.string,
 };
 
 RouteWrapper.defaultProps = {
   isPrivate: false,
+  menu: '',
 };
