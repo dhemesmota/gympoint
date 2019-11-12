@@ -1,13 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { MdAdd, MdSearch } from 'react-icons/md';
 import { Input } from '@rocketseat/unform';
+import { toast } from 'react-toastify';
 
 // import { Container } from './styles';
 
 import Header from '~/components/ContainerHeader';
 import ContainerBody from '~/components/ContainerBody';
 
+import api from '~/services/api';
+
 export default function Students() {
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    async function loadStudents() {
+      const response = await api.get('/students');
+
+      setStudents(response.data);
+    }
+
+    loadStudents();
+  }, []);
+
+  async function handleDelete(id) {
+    try {
+      const response = await api.delete(`/students/${id}`);
+      console.tron.log(response);
+    } catch (err) {
+      toast.error('Não foi possível encontrar o aluno.');
+    }
+  }
+
   return (
     <>
       <Header>
@@ -40,36 +64,32 @@ export default function Students() {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Dhemes</td>
-              <td>dhemes@gmail.com</td>
-              <td>24</td>
-              <td>
-                <span>
-                  <button type="button" className="edit">
-                    editar
-                  </button>
-                  <button type="button" className="delete">
-                    apagar
-                  </button>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Dhemes</td>
-              <td>dhemes@gmail.com</td>
-              <td>24</td>
-              <td>
-                <span>
-                  <button type="button" className="edit">
-                    editar
-                  </button>
-                  <button type="button" className="delete">
-                    apagar
-                  </button>
-                </span>
-              </td>
-            </tr>
+            {students &&
+              students.map(student => (
+                <tr key={student.id}>
+                  <td>{student.name}</td>
+                  <td>{student.email}</td>
+                  <td>{student.age}</td>
+                  <td>
+                    <span>
+                      <button type="button" className="edit">
+                        editar
+                      </button>
+                      <button
+                        type="button"
+                        className="delete"
+                        onClick={() =>
+                          window.confirm(
+                            'Deseja realmente deletar os dados do estudante?'
+                          ) && handleDelete(student.id)
+                        }
+                      >
+                        apagar
+                      </button>
+                    </span>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </ContainerBody>
