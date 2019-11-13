@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { MdAdd, MdSearch } from 'react-icons/md';
 import { Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
@@ -25,8 +26,9 @@ export default function Students() {
 
   async function handleDelete(id) {
     try {
-      const response = await api.delete(`/students/${id}`);
-      console.tron.log(response);
+      await api.delete(`/students/${id}`);
+
+      setStudents(students.filter(student => student.id !== id));
     } catch (err) {
       toast.error('Não foi possível encontrar o aluno.');
     }
@@ -38,10 +40,10 @@ export default function Students() {
         <h1>Gerenciando alunos</h1>
 
         <div>
-          <button type="button" className="gymcolor">
+          <Link to="/students/add" className="gymcolor">
             <MdAdd color="#fff" size={20} />
             CADASTRAR
-          </button>
+          </Link>
           <span>
             <Input
               label={<MdSearch color="#999" size={20} />}

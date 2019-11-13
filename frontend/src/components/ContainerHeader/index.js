@@ -21,7 +21,8 @@ const ContainerHeader = styled.div`
     justify-content: flex-end;
   }
 
-  button {
+  button,
+  a {
     height: 36px;
     border: 0;
     border-radius: 4px;
