@@ -6,6 +6,8 @@ import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 
+import InputMask from 'react-input-mask';
+
 import Header from '~/components/ContainerHeader';
 import ContainerBodyAdd from '~/components/ContainerBodyAdd';
 
@@ -23,6 +25,7 @@ const schema = Yup.object().shape({
 
 export default function StudentsAdd({ history }) {
   async function handleSubmit(data) {
+    console.tron.log(data);
     try {
       await api.post('/students', { ...data });
 
@@ -66,13 +69,22 @@ export default function StudentsAdd({ history }) {
 
           <div className="row">
             <div className="input-group">
-              <Input label="IDADE" name="age" type="number" />
+              <label htmlFor="age">IDADE</label>
+              <InputMask mask="99">
+                {() => <Input name="age" type="text" />}
+              </InputMask>
             </div>
             <div className="input-group">
-              <Input label="PESO (em kg)" name="weight" type="text" />
+              <label htmlFor="weight">PESO</label>
+              <InputMask mask="99.99">
+                {() => <Input name="weight" type="text" />}
+              </InputMask>
             </div>
             <div className="input-group">
-              <Input label="ALTURA" name="height" type="text" />
+              <label htmlFor="height">ALTURA</label>
+              <InputMask mask="9.99">
+                {() => <Input name="height" type="text" />}
+              </InputMask>
             </div>
           </div>
         </ContainerBodyAdd>
