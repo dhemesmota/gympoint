@@ -7,6 +7,7 @@ import SignIn from '~/pages/SignIn';
 import Dashboard from '~/pages/Dashboard';
 import Students from '~/pages/Students';
 import StudentsAdd from '~/pages/Students/Add';
+import StudentsEdit from '~/pages/Students/Edit';
 import Plans from '~/pages/Plans';
 import Enrollments from '~/pages/Enrollments';
 import Questions from '~/pages/Questions';
@@ -26,6 +27,12 @@ export default function Routes() {
       <Route
         path="/students/add"
         component={StudentsAdd}
+        menu="students"
+        isPrivate
+      />
+      <Route
+        path="/students/edit/:id"
+        component={StudentsEdit}
         menu="students"
         isPrivate
       />

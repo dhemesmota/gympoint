@@ -13,16 +13,18 @@ import api from '~/services/api';
 
 export default function Students() {
   const [students, setStudents] = useState([]);
+  const [search, setSearch] = useState('');
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     async function loadStudents() {
-      const response = await api.get('/students');
+      const response = await api.get(`/students?q=${query}`);
 
       setStudents(response.data);
     }
 
     loadStudents();
-  }, []);
+  }, [query]);
 
   async function handleDelete(id) {
     try {
@@ -32,6 +34,10 @@ export default function Students() {
     } catch (err) {
       toast.error('Não foi possível encontrar o aluno.');
     }
+  }
+
+  function handleFilter() {
+    setQuery(search);
   }
 
   return (
@@ -46,8 +52,16 @@ export default function Students() {
           </Link>
           <span>
             <Input
-              label={<MdSearch color="#999" size={20} />}
+              label={
+                <MdSearch
+                  color="#999"
+                  size={20}
+                  onClick={() => handleFilter()}
+                />
+              }
               name="search"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
               type="text"
               placeholder="Buscar aluno"
             />
@@ -74,9 +88,12 @@ export default function Students() {
                   <td>{student.age}</td>
                   <td>
                     <span>
-                      <button type="button" className="edit">
+                      <Link
+                        to={`/students/edit/${student.id}`}
+                        className="edit"
+                      >
                         editar
-                      </button>
+                      </Link>
                       <button
                         type="button"
                         className="delete"

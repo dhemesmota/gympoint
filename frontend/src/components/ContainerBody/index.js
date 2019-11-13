@@ -27,7 +27,8 @@ const ContainerBody = styled.div`
     span {
       display: flex;
       justify-content: flex-end;
-      button {
+      button,
+      a {
         border: 0;
         background: transparent;
 
