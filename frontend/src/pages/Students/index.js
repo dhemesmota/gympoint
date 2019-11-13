@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MdAdd, MdSearch } from 'react-icons/md';
 import { Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 
-// import { Container } from './styles';
+import { editStudentRequest } from '~/store/modules/student/actions';
 
 import Header from '~/components/ContainerHeader';
 import ContainerBody from '~/components/ContainerBody';
@@ -12,6 +13,7 @@ import ContainerBody from '~/components/ContainerBody';
 import api from '~/services/api';
 
 export default function Students() {
+  const dispatch = useDispatch();
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('');
@@ -38,6 +40,10 @@ export default function Students() {
 
   function handleFilter() {
     setQuery(search);
+  }
+
+  function handleEdit(student) {
+    dispatch(editStudentRequest(student));
   }
 
   return (
@@ -88,12 +94,13 @@ export default function Students() {
                   <td>{student.age}</td>
                   <td>
                     <span>
-                      <Link
-                        to={`/students/edit/${student.id}`}
+                      <button
+                        onClick={() => handleEdit(student)}
+                        type="button"
                         className="edit"
                       >
                         editar
-                      </Link>
+                      </button>
                       <button
                         type="button"
                         className="delete"

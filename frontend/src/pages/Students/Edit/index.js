@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
@@ -23,6 +24,11 @@ const schema = Yup.object().shape({
 
 export default function StudentsEdit({ history, match }) {
   const { id } = match.params;
+  const student = useSelector(state => state.student.student);
+
+  if (!student) {
+    history.push('/students');
+  }
 
   async function handleSubmit(data) {
     try {
@@ -36,7 +42,7 @@ export default function StudentsEdit({ history, match }) {
   }
   return (
     <>
-      <Form schema={schema} onSubmit={handleSubmit}>
+      <Form initialData={student} schema={schema} onSubmit={handleSubmit}>
         <Header>
           <h1>Edição de aluno</h1>
 
@@ -85,5 +91,5 @@ export default function StudentsEdit({ history, match }) {
 
 StudentsEdit.propTypes = {
   history: PropTypes.objectOf(PropTypes.any).isRequired,
-  match: PropTypes.isRequired,
+  match: PropTypes.objectOf(PropTypes.any).isRequired,
 };
