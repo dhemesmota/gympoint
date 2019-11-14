@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -21,7 +22,7 @@ const schema = Yup.object().shape({
   age: Yup.string().required('A idade é obrigatória'),
   weight: Yup.string().required('O peso é obrigatório'),
   height: Yup.string()
-    .min(4, 'Altura inválida. O formato válido é #.##')
+    .min(4, 'Altura inválida.')
     .required('A altura é obrigatória'),
 });
 
@@ -73,19 +74,19 @@ export default function StudentsAdd({ history }) {
             <div className="input-group">
               <label htmlFor="age">IDADE</label>
               <InputMask mask="99" maskChar="">
-                {() => <Input name="age" type="text" />}
+                {() => <Input name="age" type="text" placeholder="25" />}
               </InputMask>
             </div>
             <div className="input-group">
-              <label htmlFor="weight">PESO</label>
+              <label htmlFor="weight">PESO (em kg)</label>
               <InputMask mask="99.9" maskChar="">
-                {() => <Input name="weight" type="text" />}
+                {() => <Input name="weight" type="text" placeholder="75.5kg" />}
               </InputMask>
             </div>
             <div className="input-group">
               <label htmlFor="height">ALTURA</label>
               <InputMask mask="9.99" maskChar="">
-                {() => <Input name="height" type="text" />}
+                {() => <Input name="height" type="text" placeholder="1.78m" />}
               </InputMask>
             </div>
           </div>

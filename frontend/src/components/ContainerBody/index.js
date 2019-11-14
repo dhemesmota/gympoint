@@ -10,6 +10,15 @@ const ContainerBody = styled.div`
 
   table {
     border-spacing: 0;
+    font-size: 1.6rem;
+
+    .center {
+      text-align: center;
+    }
+
+    .right {
+      text-align: right;
+    }
   }
 
   table thead tr th {
@@ -50,6 +59,7 @@ const ContainerBody = styled.div`
   table tbody tr:last-child td {
     padding: 16px 0 0 0;
     border: none;
+    max-width: 40px;
   }
 `;
 
