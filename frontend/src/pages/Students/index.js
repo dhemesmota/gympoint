@@ -12,13 +12,17 @@ import ContainerBody from '~/components/ContainerBody';
 
 import api from '~/services/api';
 
+import Loading from '~/components/Loading';
+
 export default function Students() {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('');
 
   useEffect(() => {
+    setLoading(true);
     async function loadStudents() {
       const response = await api.get(`/students?q=${query}`);
 
@@ -26,6 +30,7 @@ export default function Students() {
     }
 
     loadStudents();
+    setLoading(false);
   }, [query]);
 
   async function handleDelete(id) {
@@ -76,48 +81,52 @@ export default function Students() {
       </Header>
 
       <ContainerBody>
-        <table>
-          <thead>
-            <tr>
-              <th>NOME</th>
-              <th>E-MAIL</th>
-              <th>IDADE</th>
-              <th> </th>
-            </tr>
-          </thead>
-          <tbody>
-            {students &&
-              students.map(student => (
-                <tr key={student.id}>
-                  <td>{student.name}</td>
-                  <td>{student.email}</td>
-                  <td>{student.age}</td>
-                  <td>
-                    <span>
-                      <button
-                        onClick={() => handleEdit(student)}
-                        type="button"
-                        className="edit"
-                      >
-                        editar
-                      </button>
-                      <button
-                        type="button"
-                        className="delete"
-                        onClick={() =>
-                          window.confirm(
-                            'Deseja realmente deletar os dados do estudante?'
-                          ) && handleDelete(student.id)
-                        }
-                      >
-                        apagar
-                      </button>
-                    </span>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+        {loading ? (
+          <Loading />
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>NOME</th>
+                <th>E-MAIL</th>
+                <th>IDADE</th>
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>
+              {students &&
+                students.map(student => (
+                  <tr key={student.id}>
+                    <td>{student.name}</td>
+                    <td>{student.email}</td>
+                    <td>{student.age}</td>
+                    <td>
+                      <span>
+                        <button
+                          onClick={() => handleEdit(student)}
+                          type="button"
+                          className="edit"
+                        >
+                          editar
+                        </button>
+                        <button
+                          type="button"
+                          className="delete"
+                          onClick={() =>
+                            window.confirm(
+                              'Deseja realmente deletar os dados do estudante?'
+                            ) && handleDelete(student.id)
+                          }
+                        >
+                          apagar
+                        </button>
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        )}
       </ContainerBody>
     </>
   );

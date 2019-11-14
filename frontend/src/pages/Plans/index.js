@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MdAdd } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 
@@ -25,10 +26,20 @@ export default function Plans() {
     handlePlans();
   }, []);
 
+  async function handleDelete(id) {
+    try {
+      await api.delete(`/plans/${id}`);
+
+      setPlans(plans.filter(plan => plan.id !== id));
+    } catch (err) {
+      toast.error('Não foi possível encontrar o plano selecionado.');
+    }
+  }
+
   return (
     <>
       <Header>
-        <h1>Gerenciar planos</h1>
+        <h1>Gerenciando planos</h1>
 
         <div>
           <button type="button" className="gymcolor">
@@ -63,7 +74,15 @@ export default function Plans() {
                         <button type="button" className="edit">
                           editar
                         </button>
-                        <button type="button" className="delete">
+                        <button
+                          type="button"
+                          className="delete"
+                          onClick={() =>
+                            window.confirm(
+                              'Deseja realmente deletar os dados selecionado?'
+                            ) && handleDelete(plan.id)
+                          }
+                        >
                           apagar
                         </button>
                       </span>
