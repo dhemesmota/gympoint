@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
 import { MdAdd } from 'react-icons/md';
 import { toast } from 'react-toastify';
@@ -19,7 +20,18 @@ export default function Plans() {
 
       const response = await api.get('/plans');
 
-      setPlans(response.data);
+      const data = response.data.map(plan => ({
+        ...plan,
+        duration: `${
+          plan.duration > 1 ? `${plan.duration} meses` : `${plan.duration} mês`
+        }`,
+        price: plan.price.toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        }),
+      }));
+
+      setPlans(data);
       setLoading(false);
     }
 

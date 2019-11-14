@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
 import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
@@ -40,7 +41,7 @@ export default function Enrollments() {
       }));
 
       setEnrollments(data);
-      console.tron.log(response.data);
+
       setLoading(false);
     }
 
