@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import InputMask from 'react-input-mask';
 
 import Header from '~/components/ContainerHeader';
-import ContainerBodyAdd from '~/components/ContainerBodyAdd';
+import ContainerBodyForm from '~/components/ContainerBodyForm';
 
 import api from '~/services/api';
 
@@ -20,7 +20,9 @@ const schema = Yup.object().shape({
     .required('O e-mail é obrigatório'),
   age: Yup.string().required('A idade é obrigatória'),
   weight: Yup.string().required('O peso é obrigatório'),
-  height: Yup.string().required('A altura é obrigatória'),
+  height: Yup.string()
+    .min(4, 'Altura inválida. O formato válido é #.##')
+    .required('A altura é obrigatória'),
 });
 
 export default function StudentsAdd({ history }) {
@@ -53,7 +55,7 @@ export default function StudentsAdd({ history }) {
           </div>
         </Header>
 
-        <ContainerBodyAdd>
+        <ContainerBodyForm>
           <Input
             label="NOME COMPLETO"
             name="name"
@@ -70,24 +72,24 @@ export default function StudentsAdd({ history }) {
           <div className="row">
             <div className="input-group">
               <label htmlFor="age">IDADE</label>
-              <InputMask mask="99">
+              <InputMask mask="99" maskChar="">
                 {() => <Input name="age" type="text" />}
               </InputMask>
             </div>
             <div className="input-group">
               <label htmlFor="weight">PESO</label>
-              <InputMask mask="99.99">
+              <InputMask mask="99.9" maskChar="">
                 {() => <Input name="weight" type="text" />}
               </InputMask>
             </div>
             <div className="input-group">
               <label htmlFor="height">ALTURA</label>
-              <InputMask mask="9.99">
+              <InputMask mask="9.99" maskChar="">
                 {() => <Input name="height" type="text" />}
               </InputMask>
             </div>
           </div>
-        </ContainerBodyAdd>
+        </ContainerBodyForm>
       </Form>
     </>
   );

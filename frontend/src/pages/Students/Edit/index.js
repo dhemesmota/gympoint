@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 
 import Header from '~/components/ContainerHeader';
-import ContainerBodyAdd from '~/components/ContainerBodyAdd';
+import ContainerBodyForm from '~/components/ContainerBodyForm';
 
 import api from '~/services/api';
 
@@ -58,7 +58,7 @@ export default function StudentsEdit({ history, match }) {
           </div>
         </Header>
 
-        <ContainerBodyAdd>
+        <ContainerBodyForm>
           <Input
             label="NOME COMPLETO"
             name="name"
@@ -83,7 +83,7 @@ export default function StudentsEdit({ history, match }) {
               <Input label="ALTURA" name="height" type="text" />
             </div>
           </div>
-        </ContainerBodyAdd>
+        </ContainerBodyForm>
       </Form>
     </>
   );

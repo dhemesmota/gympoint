@@ -8,10 +8,16 @@ const ContainerBody = styled.div`
   display: flex;
   flex-direction: column;
 
+  span {
+    margin-top: 4px;
+    color: #ee4d64;
+  }
+
   label {
     font-weight: bold;
     margin-top: 20px;
     color: #444;
+    cursor: pointer;
   }
 
   input {
