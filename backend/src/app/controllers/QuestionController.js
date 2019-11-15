@@ -6,6 +6,29 @@ import AnswerMail from '../jobs/AnswerMail';
 import Queue from '../../lib/Queue';
 
 class QuestionController {
+  async index(req, res) {
+    const { page = 1 } = req.query;
+
+    const limit = 20;
+
+    const HelpOrders = await HelpOrder.findAll({
+      where: { answer_at: null },
+      order: [['answer_at', 'desc'], ['created_at', 'desc']],
+      limit,
+      offset: (page - 1) * limit,
+      attributes: ['id', 'question', 'answer', 'answer_at'],
+      include: [
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['id', 'name', 'email'],
+        },
+      ],
+    });
+
+    return res.json(HelpOrders);
+  }
+
   async store(req, res) {
     const schema = Yup.object().shape({
       answer: Yup.string().required(),

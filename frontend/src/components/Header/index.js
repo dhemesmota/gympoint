@@ -18,7 +18,7 @@ export default function Header({ activedMenu }) {
     { title: 'ALUNOS', route: 'students' },
     { title: 'PLANOS', route: 'plans' },
     { title: 'MATRÍCULAS', route: 'enrollments' },
-    { title: 'PEDIDOS DE AUXÍLIO', route: 'questions' },
+    { title: 'PEDIDOS DE AUXÍLIO', route: 'help-orders' },
   ];
 
   function handleSignOut() {

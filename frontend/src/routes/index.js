@@ -10,7 +10,7 @@ import StudentsAdd from '~/pages/Students/Add';
 import StudentsEdit from '~/pages/Students/Edit';
 import Plans from '~/pages/Plans';
 import Enrollments from '~/pages/Enrollments';
-import Questions from '~/pages/Questions';
+import HelpOrders from '~/pages/HelpOrders';
 
 export default function Routes() {
   return (
@@ -46,9 +46,9 @@ export default function Routes() {
         isPrivate
       />
       <Route
-        path="/questions"
-        component={Questions}
-        menu="questions"
+        path="/help-orders"
+        component={HelpOrders}
+        menu="help-orders"
         isPrivate
       />
     </Switch>

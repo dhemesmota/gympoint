@@ -49,6 +49,10 @@ const ContainerBody = styled.div`
           color: #4d85ee;
         }
 
+        &.info {
+          color: #4d85ee;
+        }
+
         &.delete {
           color: #de3b3b;
         }
