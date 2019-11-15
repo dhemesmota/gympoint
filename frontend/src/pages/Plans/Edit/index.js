@@ -65,7 +65,7 @@ export default function PlansEdit({ history, match }) {
     <>
       <Form initialData={plan} schema={schema} onSubmit={handleSubmit}>
         <Header>
-          <h1>Cadastro de plano</h1>
+          <h1>Edição de plano</h1>
 
           <div>
             <Link to="/plans">
