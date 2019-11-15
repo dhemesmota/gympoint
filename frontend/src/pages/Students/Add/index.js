@@ -28,7 +28,6 @@ const schema = Yup.object().shape({
 
 export default function StudentsAdd({ history }) {
   async function handleSubmit(data) {
-    console.tron.log(data);
     try {
       await api.post('/students', { ...data });
 

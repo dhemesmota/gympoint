@@ -32,7 +32,7 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
 
-  body, input, button {
+  body, input, button, textarea {
     font: 1.4rem 'Roboto', sans-serif;
   }
 
