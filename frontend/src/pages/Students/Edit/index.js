@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -6,6 +7,7 @@ import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import InputMask from 'react-input-mask';
 
 import Header from '~/components/ContainerHeader';
 import ContainerBodyForm from '~/components/ContainerBodyForm';
@@ -76,13 +78,34 @@ export default function StudentsEdit({ history, match }) {
 
           <div className="row">
             <div className="input-group">
-              <Input label="IDADE" name="age" type="number" />
+              <label htmlFor="age">IDADE</label>
+              <InputMask
+                mask="99"
+                maskChar=""
+                defaultValue={student && student.age}
+              >
+                {() => <Input name="age" type="text" placeholder="25" />}
+              </InputMask>
             </div>
             <div className="input-group">
-              <Input label="PESO (em kg)" name="weight" type="text" />
+              <label htmlFor="weight">PESO (em kg)</label>
+              <InputMask
+                mask="99.9"
+                maskChar=""
+                defaultValue={student && student.weight}
+              >
+                {() => <Input name="weight" type="text" placeholder="75.5kg" />}
+              </InputMask>
             </div>
             <div className="input-group">
-              <Input label="ALTURA" name="height" type="text" />
+              <label htmlFor="height">ALTURA</label>
+              <InputMask
+                mask="9.99"
+                maskChar=""
+                defaultValue={student && student.height}
+              >
+                {() => <Input name="height" type="text" placeholder="1.78m" />}
+              </InputMask>
             </div>
           </div>
         </ContainerBodyForm>
