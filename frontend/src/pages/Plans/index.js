@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { MdAdd } from 'react-icons/md';
 import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 import api from '~/services/api';
 
@@ -54,10 +55,10 @@ export default function Plans() {
         <h1>Gerenciando planos</h1>
 
         <div>
-          <button type="button" className="gymcolor">
+          <Link to="/plans/add" className="gymcolor">
             <MdAdd color="#fff" size={20} />
             CADASTRAR
-          </button>
+          </Link>
         </div>
       </Header>
 
