@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
@@ -22,16 +23,25 @@ const schema = Yup.object().shape({
   price: Yup.string().required('O preço é obrigatório'),
 });
 
-export default function PlansAdd({ history }) {
+export default function PlansEdit({ history, match }) {
+  const { id } = match.params;
+  const plan = useSelector(state => state.plan.plan);
+
+  if (!plan) {
+    history.push('/plans');
+  }
+
   const [totalPrice, setTotalPrice] = useState('');
   const [duration, setDuration] = useState();
   const [price, setPrice] = useState();
 
   async function handleSubmit(data) {
-    try {
-      await api.post('/plans', { ...data });
+    console.tron.log(data);
 
-      toast.success('Plano cadastrado');
+    try {
+      await api.put(`/plans/${id}`, { ...data });
+
+      toast.success('Plano atualizado');
       history.push('/plans');
     } catch (err) {
       toast.error(err.response.data.error);
@@ -53,7 +63,7 @@ export default function PlansAdd({ history }) {
 
   return (
     <>
-      <Form schema={schema} onSubmit={handleSubmit}>
+      <Form initialData={plan} schema={schema} onSubmit={handleSubmit}>
         <Header>
           <h1>Cadastro de plano</h1>
 
@@ -78,6 +88,7 @@ export default function PlansAdd({ history }) {
               <InputMask
                 mask="99"
                 maskChar=""
+                defaultValue={plan && plan.duration}
                 onChange={e => setDuration(e.target.value)}
               >
                 {() => <Input name="duration" type="text" />}
@@ -88,6 +99,7 @@ export default function PlansAdd({ history }) {
               <InputMask
                 mask="99.99"
                 maskChar=""
+                defaultValue={plan && plan.price}
                 onChange={e => setPrice(e.target.value)}
               >
                 {() => <Input name="price" type="text" />}
@@ -104,6 +116,7 @@ export default function PlansAdd({ history }) {
   );
 }
 
-PlansAdd.propTypes = {
+PlansEdit.propTypes = {
   history: PropTypes.objectOf(PropTypes.any).isRequired,
+  match: PropTypes.objectOf(PropTypes.any).isRequired,
 };

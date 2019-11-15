@@ -1,5 +1,6 @@
 /* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { MdAdd } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -11,7 +12,10 @@ import ContainerBody from '~/components/ContainerBody';
 
 import Loading from '~/components/Loading';
 
+import { editPlanRequest } from '~/store/modules/plan/actions';
+
 export default function Plans() {
+  const dispatch = useDispatch();
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -49,6 +53,10 @@ export default function Plans() {
     }
   }
 
+  function handleEdit(plan) {
+    dispatch(editPlanRequest(plan));
+  }
+
   return (
     <>
       <Header>
@@ -84,7 +92,11 @@ export default function Plans() {
                     <td className="center">{plan.price}</td>
                     <td>
                       <span>
-                        <button type="button" className="edit">
+                        <button
+                          onClick={() => handleEdit(plan)}
+                          type="button"
+                          className="edit"
+                        >
                           editar
                         </button>
                         <button
