@@ -1,5 +1,6 @@
 /* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { MdAdd, MdCheckCircle, MdBlock } from 'react-icons/md';
@@ -64,10 +65,10 @@ export default function Enrollments() {
         <h1>Gerenciando matrículas</h1>
 
         <div>
-          <button type="button" className="gymcolor">
+          <Link to="/enrollments/add" className="gymcolor">
             <MdAdd color="#fff" size={20} />
             CADASTRAR
-          </button>
+          </Link>
         </div>
       </Header>
 

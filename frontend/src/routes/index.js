@@ -11,6 +11,7 @@ import StudentsEdit from '~/pages/Students/Edit';
 import PlansAdd from '~/pages/Plans/Add';
 import PlansEdit from '~/pages/Plans/Edit';
 import Plans from '~/pages/Plans';
+import EnrollmentsAdd from '~/pages/Enrollments/Add';
 import Enrollments from '~/pages/Enrollments';
 import HelpOrders from '~/pages/HelpOrders';
 
@@ -49,6 +50,12 @@ export default function Routes() {
       <Route path="/plans/add" component={PlansAdd} menu="plans" isPrivate />
       <Route path="/plans" component={Plans} menu="plans" isPrivate />
 
+      <Route
+        path="/enrollments/add"
+        component={EnrollmentsAdd}
+        menu="enrollments"
+        isPrivate
+      />
       <Route
         path="/enrollments"
         component={Enrollments}
