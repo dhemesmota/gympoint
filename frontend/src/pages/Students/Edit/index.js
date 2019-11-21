@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
@@ -26,9 +25,11 @@ const schema = Yup.object().shape({
     .required('A altura é obrigatória'),
 });
 
-export default function StudentsEdit({ history, match }) {
+export default function StudentsEdit({ history, match, location }) {
   const { id } = match.params;
-  const student = useSelector(state => state.student.student);
+  const { student } = location.state;
+
+  console.tron.log(location);
 
   if (!student) {
     history.push('/students');
@@ -117,4 +118,7 @@ export default function StudentsEdit({ history, match }) {
 StudentsEdit.propTypes = {
   history: PropTypes.objectOf(PropTypes.any).isRequired,
   match: PropTypes.objectOf(PropTypes.any).isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.object,
+  }).isRequired,
 };

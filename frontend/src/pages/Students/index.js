@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { MdAdd, MdSearch } from 'react-icons/md';
 import { Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
-
-import { editStudentRequest } from '~/store/modules/student/actions';
 
 import Header from '~/components/ContainerHeader';
 import ContainerBody from '~/components/ContainerBody';
@@ -14,8 +12,7 @@ import api from '~/services/api';
 
 import Loading from '~/components/Loading';
 
-export default function Students() {
-  const dispatch = useDispatch();
+export default function Students({ history }) {
   const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState('');
@@ -48,7 +45,7 @@ export default function Students() {
   }
 
   function handleEdit(student) {
-    dispatch(editStudentRequest(student));
+    history.push(`/students/edit/${student.id}`, { student });
   }
 
   return (
@@ -131,3 +128,7 @@ export default function Students() {
     </>
   );
 }
+
+Students.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+};
