@@ -8,7 +8,7 @@ import Dashboard from '~/pages/Dashboard';
 import Students from '~/pages/Students';
 import StudentsNew from '~/pages/Students/New';
 import StudentsEdit from '~/pages/Students/Edit';
-import PlansAdd from '~/pages/Plans/Add';
+import PlansNew from '~/pages/Plans/New';
 import PlansEdit from '~/pages/Plans/Edit';
 import Plans from '~/pages/Plans';
 import EnrollmentsAdd from '~/pages/Enrollments/Add';
@@ -47,7 +47,7 @@ export default function Routes() {
         menu="plans"
         isPrivate
       />
-      <Route path="/plans/add" component={PlansAdd} menu="plans" isPrivate />
+      <Route path="/plans/new" component={PlansNew} menu="plans" isPrivate />
       <Route path="/plans" component={Plans} menu="plans" isPrivate />
 
       <Route

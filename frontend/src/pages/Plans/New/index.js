@@ -22,7 +22,7 @@ const schema = Yup.object().shape({
   price: Yup.string().required('O preço é obrigatório'),
 });
 
-export default function PlansAdd({ history }) {
+export default function PlansNew({ history }) {
   const [totalPrice, setTotalPrice] = useState('');
   const [duration, setDuration] = useState();
   const [price, setPrice] = useState();
@@ -104,6 +104,6 @@ export default function PlansAdd({ history }) {
   );
 }
 
-PlansAdd.propTypes = {
+PlansNew.propTypes = {
   history: PropTypes.objectOf(PropTypes.any).isRequired,
 };

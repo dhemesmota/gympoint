@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
@@ -23,9 +22,9 @@ const schema = Yup.object().shape({
   price: Yup.string().required('O preço é obrigatório'),
 });
 
-export default function PlansEdit({ history, match }) {
+export default function PlansEdit({ history, match, location }) {
   const { id } = match.params;
-  const plan = useSelector(state => state.plan.plan);
+  const { plan } = location.state;
 
   if (!plan) {
     history.push('/plans');
@@ -35,9 +34,21 @@ export default function PlansEdit({ history, match }) {
   const [duration, setDuration] = useState();
   const [price, setPrice] = useState();
 
-  async function handleSubmit(data) {
-    console.tron.log(data);
+  useEffect(() => {
+    const total = plan.duration * plan.price;
 
+    setTotalPrice(
+      total.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      })
+    );
+    setDuration(plan.duration);
+    setPrice(plan.price);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function handleSubmit(data) {
     try {
       await api.put(`/plans/${id}`, { ...data });
 
@@ -97,7 +108,8 @@ export default function PlansEdit({ history, match }) {
             <div className="input-group">
               <label htmlFor="price">PREÇO MENSAL</label>
               <InputMask
-                mask="99.99"
+                mask="999.99"
+                maskPlaceholder={null}
                 maskChar=""
                 defaultValue={plan && plan.price}
                 onChange={e => setPrice(e.target.value)}
@@ -119,4 +131,7 @@ export default function PlansEdit({ history, match }) {
 PlansEdit.propTypes = {
   history: PropTypes.objectOf(PropTypes.any).isRequired,
   match: PropTypes.objectOf(PropTypes.any).isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.object,
+  }).isRequired,
 };

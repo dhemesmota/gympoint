@@ -11,24 +11,30 @@ import ContainerBody from '~/components/ContainerBody';
 import api from '~/services/api';
 
 import Loading from '~/components/Loading';
+import Pagination from '~/components/Pagination';
 
 export default function Students({ history }) {
   const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('');
+  const [limitItems, setLimitItems] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     setLoading(true);
     async function loadStudents() {
-      const response = await api.get(`/students?q=${query}`);
+      const response = await api.get(`/students?q=${query}&page=${page}`);
 
-      setStudents(response.data);
+      setLimitItems(response.data.limit);
+      setTotalItems(response.data.count);
+      setStudents(response.data.students);
     }
 
     loadStudents();
     setLoading(false);
-  }, [query]);
+  }, [page, query]);
 
   async function handleDelete(id) {
     try {
@@ -42,10 +48,16 @@ export default function Students({ history }) {
 
   function handleFilter() {
     setQuery(search);
+    setPage(1);
   }
 
   function handleEdit(student) {
     history.push(`/students/${student.id}/edit`, { student });
+  }
+
+  function handlePage(p) {
+    setPage(p);
+    console.tron.log(`Pag: ${p}`);
   }
 
   return (
@@ -81,49 +93,58 @@ export default function Students({ history }) {
         {loading ? (
           <Loading />
         ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>NOME</th>
-                <th>E-MAIL</th>
-                <th>IDADE</th>
-                <th> </th>
-              </tr>
-            </thead>
-            <tbody>
-              {students &&
-                students.map(student => (
-                  <tr key={student.id}>
-                    <td>{student.name}</td>
-                    <td>{student.email}</td>
-                    <td>{student.age}</td>
-                    <td>
-                      <span>
-                        <button
-                          onClick={() => handleEdit(student)}
-                          type="button"
-                          className="edit"
-                        >
-                          editar
-                        </button>
-                        <button
-                          type="button"
-                          className="delete"
-                          onClick={() =>
-                            // eslint-disable-next-line no-alert
-                            window.confirm(
-                              'Deseja realmente deletar os dados do estudante?'
-                            ) && handleDelete(student.id)
-                          }
-                        >
-                          apagar
-                        </button>
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+          <>
+            <table>
+              <thead>
+                <tr>
+                  <th>NOME</th>
+                  <th>E-MAIL</th>
+                  <th>IDADE</th>
+                  <th> </th>
+                </tr>
+              </thead>
+              <tbody>
+                {students &&
+                  students.map(student => (
+                    <tr key={student.id}>
+                      <td>{student.name}</td>
+                      <td>{student.email}</td>
+                      <td>{student.age}</td>
+                      <td>
+                        <span>
+                          <button
+                            onClick={() => handleEdit(student)}
+                            type="button"
+                            className="edit"
+                          >
+                            editar
+                          </button>
+                          <button
+                            type="button"
+                            className="delete"
+                            onClick={() =>
+                              // eslint-disable-next-line no-alert
+                              window.confirm(
+                                'Deseja realmente deletar os dados do estudante?'
+                              ) && handleDelete(student.id)
+                            }
+                          >
+                            apagar
+                          </button>
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+
+            <Pagination
+              total={totalItems}
+              page={page}
+              limit={limitItems}
+              selectPg={handlePage}
+            />
+          </>
         )}
       </ContainerBody>
     </>

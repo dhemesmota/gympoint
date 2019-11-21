@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { MdAdd } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -12,10 +12,7 @@ import ContainerBody from '~/components/ContainerBody';
 
 import Loading from '~/components/Loading';
 
-import { editPlanRequest } from '~/store/modules/plan/actions';
-
-export default function Plans() {
-  const dispatch = useDispatch();
+export default function Plans({ history }) {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -27,10 +24,10 @@ export default function Plans() {
 
       const data = response.data.map(plan => ({
         ...plan,
-        duration: `${
+        duration_formated: `${
           plan.duration > 1 ? `${plan.duration} meses` : `${plan.duration} mês`
         }`,
-        price: plan.price.toLocaleString('pt-BR', {
+        price_formated: plan.price.toLocaleString('pt-BR', {
           style: 'currency',
           currency: 'BRL',
         }),
@@ -54,7 +51,7 @@ export default function Plans() {
   }
 
   function handleEdit(plan) {
-    dispatch(editPlanRequest(plan));
+    history.push(`/plans/${plan.id}/edit`, { plan });
   }
 
   return (
@@ -63,7 +60,7 @@ export default function Plans() {
         <h1>Gerenciando planos</h1>
 
         <div>
-          <Link to="/plans/add" className="gymcolor">
+          <Link to="/plans/new" className="gymcolor">
             <MdAdd color="#fff" size={20} />
             CADASTRAR
           </Link>
@@ -88,8 +85,8 @@ export default function Plans() {
                 plans.map(plan => (
                   <tr key={plan.id}>
                     <td>{plan.title}</td>
-                    <td className="center">{plan.duration}</td>
-                    <td className="center">{plan.price}</td>
+                    <td className="center">{plan.duration_formated}</td>
+                    <td className="center">{plan.price_formated}</td>
                     <td>
                       <span>
                         <button
@@ -121,3 +118,7 @@ export default function Plans() {
     </>
   );
 }
+
+Plans.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+};
