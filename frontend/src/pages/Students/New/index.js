@@ -26,7 +26,7 @@ const schema = Yup.object().shape({
     .required('A altura é obrigatória'),
 });
 
-export default function StudentsAdd({ history }) {
+export default function StudentsNew({ history }) {
   async function handleSubmit(data) {
     try {
       await api.post('/students', { ...data });
@@ -95,6 +95,6 @@ export default function StudentsAdd({ history }) {
   );
 }
 
-StudentsAdd.propTypes = {
+StudentsNew.propTypes = {
   history: PropTypes.objectOf(PropTypes.any).isRequired,
 };

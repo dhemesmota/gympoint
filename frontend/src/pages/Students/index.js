@@ -45,7 +45,7 @@ export default function Students({ history }) {
   }
 
   function handleEdit(student) {
-    history.push(`/students/edit/${student.id}`, { student });
+    history.push(`/students/${student.id}/edit`, { student });
   }
 
   return (
@@ -54,7 +54,7 @@ export default function Students({ history }) {
         <h1>Gerenciando alunos</h1>
 
         <div>
-          <Link to="/students/add" className="gymcolor">
+          <Link to="/students/new" className="gymcolor">
             <MdAdd color="#fff" size={20} />
             CADASTRAR
           </Link>
@@ -110,6 +110,7 @@ export default function Students({ history }) {
                           type="button"
                           className="delete"
                           onClick={() =>
+                            // eslint-disable-next-line no-alert
                             window.confirm(
                               'Deseja realmente deletar os dados do estudante?'
                             ) && handleDelete(student.id)
