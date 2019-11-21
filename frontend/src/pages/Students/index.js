@@ -137,15 +137,14 @@ export default function Students({ history }) {
                   ))}
               </tbody>
             </table>
-
-            <Pagination
-              total={totalItems}
-              page={page}
-              limit={limitItems}
-              selectPg={handlePage}
-            />
           </>
         )}
+        <Pagination
+          total={totalItems}
+          page={page}
+          limit={limitItems}
+          selectPg={handlePage}
+        />
       </ContainerBody>
     </>
   );

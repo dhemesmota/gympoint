@@ -31,8 +31,8 @@ export default function Pagination({ total, page, limit, selectPg }) {
 }
 
 Pagination.propTypes = {
-  total: PropTypes.string.isRequired,
-  page: PropTypes.string.isRequired,
-  limit: PropTypes.string.isRequired,
+  total: PropTypes.number.isRequired,
+  page: PropTypes.number.isRequired,
+  limit: PropTypes.number.isRequired,
   selectPg: PropTypes.func.isRequired,
 };
