@@ -5,7 +5,11 @@ import { ContainerList, LinkList, DisabledLink } from './styles';
 
 export default function Pagination({ total, page, limit, selectPg }) {
   const totalPage = Math.ceil(total / limit);
-  console.tron.error(page);
+
+  if (totalPage === 1) {
+    return <span />;
+  }
+
   const items = [];
 
   // eslint-disable-next-line no-plusplus
@@ -13,7 +17,6 @@ export default function Pagination({ total, page, limit, selectPg }) {
     items.push({ value: i, active: i === page ? 'active' : '' });
   }
 
-  console.tron.warn(items);
   return (
     <ContainerList>
       {items &&

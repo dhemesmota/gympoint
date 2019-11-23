@@ -12,18 +12,22 @@ import Header from '~/components/ContainerHeader';
 import ContainerBody from '~/components/ContainerBody';
 
 import Loading from '~/components/Loading';
+import Pagination from '~/components/Pagination';
 
 export default function Enrollments() {
   const [enrollments, setEnrollments] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [limitItems, setLimitItems] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function handleEnrollments() {
       setLoading(true);
 
-      const response = await api.get('/enrollments');
+      const response = await api.get(`/enrollments?page=${page}`);
 
-      const data = response.data.map(enrollment => ({
+      const data = response.data.enrollments.map(enrollment => ({
         ...enrollment,
         start_date: format(
           parseISO(enrollment.start_date),
@@ -42,12 +46,14 @@ export default function Enrollments() {
       }));
 
       setEnrollments(data);
+      setLimitItems(response.data.limit);
+      setTotalItems(response.data.count);
 
       setLoading(false);
     }
 
     handleEnrollments();
-  }, []);
+  }, [page]);
 
   async function handleDelete(id) {
     try {
@@ -59,13 +65,17 @@ export default function Enrollments() {
     }
   }
 
+  function handlePage(p) {
+    setPage(p);
+  }
+
   return (
     <>
       <Header>
         <h1>Gerenciando matrículas</h1>
 
         <div>
-          <Link to="/enrollments/add" className="gymcolor">
+          <Link to="/enrollments/new" className="gymcolor">
             <MdAdd color="#fff" size={20} />
             CADASTRAR
           </Link>
@@ -127,6 +137,12 @@ export default function Enrollments() {
             </tbody>
           </table>
         )}
+        <Pagination
+          total={totalItems}
+          page={page}
+          limit={limitItems}
+          selectPg={handlePage}
+        />
       </ContainerBody>
     </>
   );

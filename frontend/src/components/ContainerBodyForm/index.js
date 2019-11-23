@@ -16,16 +16,21 @@ const ContainerBody = styled.div`
   label {
     font-weight: bold;
     margin-top: 20px;
+    margin-bottom: 8px;
     color: #444;
     cursor: pointer;
   }
 
   input {
     height: 45px;
-    margin-top: 8px;
+    width: 100%;
     border-radius: 4px;
     border: 1px solid #ddd;
     padding: 13px 15px;
+  }
+
+  .select input {
+    height: 31px;
   }
 
   .row {

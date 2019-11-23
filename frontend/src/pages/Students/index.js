@@ -57,7 +57,6 @@ export default function Students({ history }) {
 
   function handlePage(p) {
     setPage(p);
-    console.tron.log(`Pag: ${p}`);
   }
 
   return (
