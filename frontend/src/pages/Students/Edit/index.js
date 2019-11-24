@@ -29,8 +29,6 @@ export default function StudentsEdit({ history, match, location }) {
   const { id } = match.params;
   const { student } = location.state;
 
-  console.tron.log(location);
-
   if (!student) {
     history.push('/students');
   }
@@ -45,6 +43,7 @@ export default function StudentsEdit({ history, match, location }) {
       toast.error(err.response.data.error);
     }
   }
+
   return (
     <>
       <Form initialData={student} schema={schema} onSubmit={handleSubmit}>

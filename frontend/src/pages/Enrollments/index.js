@@ -1,5 +1,6 @@
 /* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
@@ -17,7 +18,7 @@ import Pagination from '~/components/Pagination';
 import Modal from '~/components/Modal';
 import Button from '~/styles/Button';
 
-export default function Enrollments() {
+export default function Enrollments({ history }) {
   const [enrollments, setEnrollments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState({
@@ -37,7 +38,7 @@ export default function Enrollments() {
 
       const data = response.data.enrollments.map(enrollment => ({
         ...enrollment,
-        start_date: format(
+        start_date_formated: format(
           parseISO(enrollment.start_date),
           "d 'de' MMMM 'de' yyyy",
           {
@@ -79,6 +80,10 @@ export default function Enrollments() {
     setPage(p);
   }
 
+  function handleEdit(enrollment) {
+    history.push(`/enrollments/${enrollment.id}/edit`, { enrollment });
+  }
+
   return (
     <>
       <Header>
@@ -115,7 +120,7 @@ export default function Enrollments() {
                     <td className="center">
                       {enrollment.plan && enrollment.plan.title}
                     </td>
-                    <td className="center">{enrollment.start_date}</td>
+                    <td className="center">{enrollment.start_date_formated}</td>
                     <td className="center">{enrollment.end_date}</td>
                     <td className="center">
                       {enrollment.active ? (
@@ -126,7 +131,11 @@ export default function Enrollments() {
                     </td>
                     <td>
                       <span>
-                        <button type="button" className="edit">
+                        <button
+                          onClick={() => handleEdit(enrollment)}
+                          type="button"
+                          className="edit"
+                        >
                           editar
                         </button>
                         <button
@@ -172,3 +181,7 @@ export default function Enrollments() {
     </>
   );
 }
+
+Enrollments.propTypes = {
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
+};
