@@ -14,9 +14,17 @@ import ContainerBody from '~/components/ContainerBody';
 import Loading from '~/components/Loading';
 import Pagination from '~/components/Pagination';
 
+import Modal from '~/components/Modal';
+import Button from '~/styles/Button';
+
 export default function Enrollments() {
   const [enrollments, setEnrollments] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [modal, setModal] = useState({
+    open: false,
+    value: null,
+  });
+
   const [limitItems, setLimitItems] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(1);
@@ -60,9 +68,11 @@ export default function Enrollments() {
       await api.delete(`/enrollments/${id}`);
 
       setEnrollments(enrollments.filter(enrollment => enrollment.id !== id));
+      toast.success('Matrícula apagada com sucesso!');
     } catch (err) {
       toast.error('Não foi possível encontrar a matrícula selecionada.');
     }
+    setModal({ open: false, value: null });
   }
 
   function handlePage(p) {
@@ -123,9 +133,7 @@ export default function Enrollments() {
                           type="button"
                           className="delete"
                           onClick={() =>
-                            window.confirm(
-                              'Deseja realmente deletar os dados selecionado?'
-                            ) && handleDelete(enrollment.id)
+                            setModal({ open: true, value: enrollment.id })
                           }
                         >
                           apagar
@@ -144,6 +152,23 @@ export default function Enrollments() {
           selectPg={handlePage}
         />
       </ContainerBody>
+
+      {modal.open && (
+        <Modal title="Apagar matrícula" size="small">
+          <p>Deseja realmente apagar a matrícula selecionada?</p>
+          <div>
+            <Button onClick={() => setModal({ open: false, value: null })}>
+              CANCELAR
+            </Button>
+            <Button
+              onClick={() => handleDelete(modal.value)}
+              className="gymcolor"
+            >
+              APAGAR
+            </Button>
+          </div>
+        </Modal>
+      )}
     </>
   );
 }
