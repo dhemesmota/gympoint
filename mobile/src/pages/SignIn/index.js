@@ -1,12 +1,26 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Image } from 'react-native';
 
-import { Background } from './styles';
+import logo from '~/assets/logo.png';
+
+import { Background, Container, Form, FormInput, SubmitButton } from './styles';
 
 export default function SignIn() {
   return (
     <Background>
-      <Text>SignIn</Text>
+      <Container>
+        <Image source={logo} />
+
+        <Form>
+          <FormInput
+            icon="fingerprint"
+            secureTextEntry
+            placeholder="Informe seu ID de cadastro"
+          />
+
+          <SubmitButton onPress={() => {}}>Entrar no sistema</SubmitButton>
+        </Form>
+      </Container>
     </Background>
   );
 }
