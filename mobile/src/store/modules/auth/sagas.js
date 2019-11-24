@@ -21,11 +21,14 @@ export function* signIn({ payload }) {
   }
 }
 
+export function setToken() {}
+
 export function signOut() {
   // history.push('/');
 }
 
 export default all([
+  takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
   takeLatest('@auth/SIGN_OUT', signOut),
 ]);
