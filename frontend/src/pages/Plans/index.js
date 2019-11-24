@@ -12,9 +12,16 @@ import ContainerBody from '~/components/ContainerBody';
 
 import Loading from '~/components/Loading';
 
+import Modal from '~/components/Modal';
+import Button from '~/styles/Button';
+
 export default function Plans({ history }) {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [modal, setModal] = useState({
+    open: false,
+    value: null,
+  });
 
   useEffect(() => {
     async function handlePlans() {
@@ -45,9 +52,12 @@ export default function Plans({ history }) {
       await api.delete(`/plans/${id}`);
 
       setPlans(plans.filter(plan => plan.id !== id));
+      toast.success('Plano apagado com sucesso!');
     } catch (err) {
       toast.error('Não foi possível encontrar o plano selecionado.');
     }
+
+    setModal({ open: false, value: null });
   }
 
   function handleEdit(plan) {
@@ -100,9 +110,7 @@ export default function Plans({ history }) {
                           type="button"
                           className="delete"
                           onClick={() =>
-                            window.confirm(
-                              'Deseja realmente deletar os dados selecionado?'
-                            ) && handleDelete(plan.id)
+                            setModal({ open: true, value: plan.id })
                           }
                         >
                           apagar
@@ -115,6 +123,23 @@ export default function Plans({ history }) {
           </table>
         )}
       </ContainerBody>
+
+      {modal.open && (
+        <Modal title="Apagar plano" size="small">
+          <p>Deseja realmente apagar o plano selecionado?</p>
+          <div>
+            <Button onClick={() => setModal({ open: false, value: null })}>
+              CANCELAR
+            </Button>
+            <Button
+              onClick={() => handleDelete(modal.value)}
+              className="gymcolor"
+            >
+              APAGAR
+            </Button>
+          </div>
+        </Modal>
+      )}
     </>
   );
 }

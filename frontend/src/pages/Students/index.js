@@ -13,6 +13,9 @@ import api from '~/services/api';
 import Loading from '~/components/Loading';
 import Pagination from '~/components/Pagination';
 
+import Modal from '~/components/Modal';
+import Button from '~/styles/Button';
+
 export default function Students({ history }) {
   const [loading, setLoading] = useState(false);
   const [students, setStudents] = useState([]);
@@ -21,6 +24,10 @@ export default function Students({ history }) {
   const [limitItems, setLimitItems] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(1);
+  const [modal, setModal] = useState({
+    open: false,
+    value: null,
+  });
 
   useEffect(() => {
     setLoading(true);
@@ -41,9 +48,11 @@ export default function Students({ history }) {
       await api.delete(`/students/${id}`);
 
       setStudents(students.filter(student => student.id !== id));
+      toast.success('Aluno apagado com sucesso!');
     } catch (err) {
       toast.error('Não foi possível encontrar o aluno.');
     }
+    setModal({ open: false, value: null });
   }
 
   function handleFilter() {
@@ -122,10 +131,7 @@ export default function Students({ history }) {
                             type="button"
                             className="delete"
                             onClick={() =>
-                              // eslint-disable-next-line no-alert
-                              window.confirm(
-                                'Deseja realmente deletar os dados do estudante?'
-                              ) && handleDelete(student.id)
+                              setModal({ open: true, value: student.id })
                             }
                           >
                             apagar
@@ -145,6 +151,23 @@ export default function Students({ history }) {
           selectPg={handlePage}
         />
       </ContainerBody>
+
+      {modal.open && (
+        <Modal title="Apagar aluno" size="small">
+          <p>Deseja realmente apagar o aluno selecionado?</p>
+          <div>
+            <Button onClick={() => setModal({ open: false, value: null })}>
+              CANCELAR
+            </Button>
+            <Button
+              onClick={() => handleDelete(modal.value)}
+              className="gymcolor"
+            >
+              APAGAR
+            </Button>
+          </div>
+        </Modal>
+      )}
     </>
   );
 }
