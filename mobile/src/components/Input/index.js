@@ -1,14 +1,14 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PropTypes from 'prop-types';
 
 import { Container, TInput } from './styles';
 
-function Input({ style, icon, ...rest }, ref) {
+export default function Input({ style, icon, ...rest }) {
   return (
     <Container style={style}>
       {icon && <Icon name={icon} size={20} color="#999" />}
-      <TInput {...rest} ref={ref} />
+      <TInput {...rest} />
     </Container>
   );
 }
@@ -22,5 +22,3 @@ Input.defaultProps = {
   icon: null,
   style: {},
 };
-
-export default forwardRef(Input);

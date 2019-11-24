@@ -6,6 +6,8 @@ import logo from '~/assets/logo.png';
 import { Background, Container, Form, FormInput, SubmitButton } from './styles';
 
 export default function SignIn() {
+  function handleSubmit() {}
+
   return (
     <Background>
       <Container>
@@ -16,9 +18,11 @@ export default function SignIn() {
             icon="fingerprint"
             secureTextEntry
             placeholder="Informe seu ID de cadastro"
+            returnKeyType="send"
+            onSubmitEditing={handleSubmit}
           />
 
-          <SubmitButton onPress={() => {}}>Entrar no sistema</SubmitButton>
+          <SubmitButton onPress={handleSubmit}>Entrar no sistema</SubmitButton>
         </Form>
       </Container>
     </Background>
