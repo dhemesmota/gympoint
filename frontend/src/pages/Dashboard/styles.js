@@ -25,6 +25,10 @@ export const Card = styled(Link)`
   flex-direction: row;
   align-items: center;
 
+  &:hover {
+    transform: translateY(-5px);
+  }
+
   .left {
     width: 130px;
     height: 100%;
