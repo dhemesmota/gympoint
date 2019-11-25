@@ -12,9 +12,9 @@ class EnrollmentController {
   async index(req, res) {
     const { page = 1 } = req.query;
 
-    const limit = 20;
+    const limit = 10;
 
-    const enrollments = await Enrollment.findAll({
+    const enrollments = await Enrollment.findAndCountAll({
       order: [['created_at', 'desc']],
       limit,
       offset: (page - 1) * limit,
@@ -33,7 +33,12 @@ class EnrollmentController {
       ],
     });
 
-    return res.json(enrollments);
+    return res.json({
+      enrollments: enrollments.rows,
+      count: enrollments.count,
+      page,
+      limit,
+    });
   }
 
   async store(req, res) {

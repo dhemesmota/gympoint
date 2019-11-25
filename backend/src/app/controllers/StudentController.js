@@ -7,9 +7,9 @@ class StudentController {
     const { page = 1 } = req.query;
     const { q = '' } = req.query;
 
-    const limit = 20;
+    const limit = 10;
 
-    const students = await Student.findAll({
+    const students = await Student.findAndCountAll({
       where: { name: { [Op.like]: `%${q}%` } },
       order: ['name'],
       limit,
@@ -17,7 +17,12 @@ class StudentController {
       attributes: ['id', 'name', 'email', 'age', 'weight', 'height'],
     });
 
-    return res.json(students);
+    return res.json({
+      students: students.rows,
+      count: students.count,
+      page,
+      limit,
+    });
   }
 
   async store(req, res) {
