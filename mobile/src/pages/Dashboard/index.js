@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
+import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import api from '~/services/api';
 
 import Background from '~/styles/Background';
 import Header from '~/components/Header';
@@ -8,18 +12,38 @@ import CheckIn from '~/components/CheckIn';
 
 import { Container, List } from './styles';
 
-const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
 export default function Dashboard() {
+  const [checkIns, setCheckIns] = useState([]);
+  const studentId = useSelector(state => state.auth.tokenId);
+
+  useEffect(() => {
+    async function loadCheckIns() {
+      const response = await api.get(`students/${studentId}/checkins`);
+      setCheckIns(response.data);
+    }
+
+    loadCheckIns();
+  }, [studentId]);
+
+  async function handleCheckIn() {
+    try {
+      await api.post(`students/${studentId}/checkins`);
+
+      Alert.alert('Check-in', 'Seu check-in foi efetuado com sucesso!');
+    } catch (err) {
+      Alert.alert('Erro', err.response.data.error);
+    }
+  }
+
   return (
     <Background>
       <Header />
       <Container>
-        <Button>Novo check-in</Button>
+        <Button onPress={handleCheckIn}>Novo check-in</Button>
 
         <List
-          data={data}
-          keyExtractor={item => String(item)}
+          data={checkIns}
+          keyExtractor={item => String(item.id)}
           renderItem={({ item }) => <CheckIn data={item} />}
         />
       </Container>
