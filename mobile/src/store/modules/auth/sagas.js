@@ -7,12 +7,12 @@ import { signInSuccess, signFailure } from './actions';
 
 export function* signIn({ payload }) {
   try {
-    const { userId } = payload;
+    const { studentId } = payload;
 
-    const response = yield call(api.get, `students/${userId}/checkins`);
+    const response = yield call(api.get, `students/sessions/${studentId}`);
     console.tron.warn(response);
 
-    yield put(signInSuccess(userId));
+    yield put(signInSuccess(studentId));
 
     // history.push('/dashboard');
   } catch (err) {
