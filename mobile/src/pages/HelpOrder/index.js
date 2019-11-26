@@ -11,30 +11,34 @@ import Help from '~/components/Help';
 
 import { Container, ListHelp } from './styles';
 
-export default function HelpOrder() {
+export default function HelpOrder({ navigation }) {
   const [helpOrders, setHelpOrders] = useState([]);
   const studentId = useSelector(state => state.auth.tokenId);
 
   useEffect(() => {
-    async function handleHelpOrders() {
+    async function loadHelpOrders() {
       const response = await api.get(`students/${studentId}/help-orders`);
 
       setHelpOrders(response.data);
     }
 
-    handleHelpOrders();
+    loadHelpOrders();
   }, [studentId]);
 
   return (
     <Background>
       <Header />
       <Container>
-        <Button onPress={() => {}}>Novo pedido de auxílio</Button>
+        <Button onPress={() => navigation.navigate('New')}>
+          Novo pedido de auxílio
+        </Button>
 
         <ListHelp
           data={helpOrders}
           keyExtractor={item => String(item)}
-          renderItem={({ item }) => <Help data={item} />}
+          renderItem={({ item }) => (
+            <Help data={item} navigation={navigation} />
+          )}
         />
       </Container>
     </Background>
@@ -42,8 +46,8 @@ export default function HelpOrder() {
 }
 
 HelpOrder.navigationOptions = {
-  tabBarLabel: 'Check-ins',
+  tabBarLabel: 'Pedir ajuda',
   tabBarIcon: ({ tintColor }) => (
-    <Icon name="help-outline" size={20} color={tintColor} />
+    <Icon name="help-outline" size={20} color="#666" />
   ),
 };

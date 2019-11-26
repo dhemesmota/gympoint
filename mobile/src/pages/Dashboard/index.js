@@ -56,7 +56,7 @@ export default function Dashboard() {
 }
 
 Dashboard.navigationOptions = {
-  tabBarLabel: 'Pedir ajuda',
+  tabBarLabel: 'Check-ins',
   tabBarIcon: ({ tintColor }) => (
     <Icon name="check" size={20} color={tintColor} />
   ),
