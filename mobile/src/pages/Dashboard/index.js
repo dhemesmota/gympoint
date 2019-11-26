@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -27,10 +28,13 @@ export default function Dashboard() {
 
   async function handleCheckIn() {
     try {
-      await api.post(`students/${studentId}/checkins`);
+      const response = await api.post(`students/${studentId}/checkins`);
+
+      setCheckIns([response.data, ...checkIns]);
 
       Alert.alert('Check-in', 'Seu check-in foi efetuado com sucesso!');
     } catch (err) {
+      console.tron.warn(err.response);
       Alert.alert('Erro', err.response.data.error);
     }
   }
