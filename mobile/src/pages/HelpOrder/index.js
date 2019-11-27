@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { withNavigationFocus } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Image } from 'react-native';
@@ -13,7 +14,7 @@ import Help from '~/components/Help';
 import { Container, ListHelp } from './styles';
 import logo from '~/assets/logo-vertical.png';
 
-export default function HelpOrder({ navigation }) {
+function HelpOrder({ navigation, isFocused }) {
   const [helpOrders, setHelpOrders] = useState([]);
   const studentId = useSelector(state => state.auth.tokenId);
 
@@ -25,7 +26,7 @@ export default function HelpOrder({ navigation }) {
     }
 
     loadHelpOrders();
-  }, [studentId]);
+  }, [studentId, isFocused]);
 
   return (
     <Background>
@@ -36,7 +37,7 @@ export default function HelpOrder({ navigation }) {
 
         <ListHelp
           data={helpOrders}
-          keyExtractor={item => String(item)}
+          keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
             <Help data={item} navigation={navigation} />
           )}
@@ -59,4 +60,7 @@ HelpOrder.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
+  isFocused: PropTypes.bool.isRequired,
 };
+
+export default withNavigationFocus(HelpOrder);
