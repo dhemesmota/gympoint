@@ -34,7 +34,6 @@ export default function Dashboard() {
 
       Alert.alert('Check-in', 'Seu check-in foi efetuado com sucesso!');
     } catch (err) {
-      console.tron.warn(err.response);
       Alert.alert('Erro', err.response.data.error);
     }
   }

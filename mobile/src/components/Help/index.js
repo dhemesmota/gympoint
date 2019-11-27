@@ -6,7 +6,6 @@ import pt from 'date-fns/locale/pt';
 import { Container, Header, Title, DateText, Content } from './styles';
 
 export default function Help({ data, navigation }) {
-  console.tron.log(data);
   const dateParsed = useMemo(() => {
     return formatRelative(parseISO(data.createdAt), new Date(), {
       locale: pt,
