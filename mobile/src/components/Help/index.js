@@ -30,5 +30,5 @@ Help.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
-  data: PropTypes.objectOf(PropTypes.object).isRequired,
+  data: PropTypes.oneOfType([PropTypes.object, PropTypes.number]).isRequired,
 };

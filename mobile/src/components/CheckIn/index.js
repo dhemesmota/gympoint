@@ -20,3 +20,10 @@ export default function CheckIn({ data }) {
     </Container>
   );
 }
+
+CheckIn.propTypes = {
+  data: PropTypes.shape({
+    id: PropTypes.number,
+    createdAt: PropTypes.string,
+  }).isRequired,
+};
