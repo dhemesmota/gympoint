@@ -1,8 +1,21 @@
 import React from 'react';
-import { View } from 'react-native';
+import PropTypes from 'prop-types';
 
-// import { Container } from './styles';
+import Background from '~/styles/Background';
+
+import Header from '~/components/Header';
 
 export default function New() {
-  return <View />;
+  return <Background />;
 }
+
+New.navigationOptions = {
+  headerTitle: <Header />,
+  headerTintColor: '#EE4E62',
+};
+
+New.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+};

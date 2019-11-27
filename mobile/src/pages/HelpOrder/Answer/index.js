@@ -1,8 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
 
-// import { Container } from './styles';
+import Background from '~/styles/Background';
+
+import Header from '~/components/Header';
 
 export default function Answer() {
-  return <View />;
+  return <Background />;
 }
+
+Answer.navigationOptions = {
+  headerTitle: <Header />,
+  headerTintColor: '#EE4E62',
+};

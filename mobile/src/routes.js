@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import SignIn from './pages/SignIn';
 
@@ -18,13 +20,27 @@ export default (signedIn = false) =>
         Sign: createSwitchNavigator({ SignIn }),
         App: createBottomTabNavigator(
           {
-            Dashboard,
+            Dashboard: {
+              screen: createStackNavigator(
+                { Dashboard },
+                { headerLayoutPreset: 'center' },
+              ),
+              navigationOptions: {
+                tabBarLabel: 'Check-ins',
+                tabBarIcon: ({ tintColor }) => (
+                  <Icon name="check" size={20} color={tintColor} />
+                ),
+              },
+            },
             HelpOrder: {
-              screen: createSwitchNavigator({
-                HelpOrder,
-                Answer,
-                New,
-              }),
+              screen: createStackNavigator(
+                {
+                  HelpOrder,
+                  Answer,
+                  New,
+                },
+                { headerLayoutPreset: 'center' },
+              ),
               navigationOptions: {
                 tabBarLabel: 'Pedir ajuda',
                 tabBarIcon: ({ tintColor }) => (

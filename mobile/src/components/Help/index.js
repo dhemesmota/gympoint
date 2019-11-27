@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { parseISO, formatRelative } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
@@ -24,3 +25,10 @@ export default function Help({ data, navigation }) {
     </Container>
   );
 }
+
+Help.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
+  data: PropTypes.objectOf(PropTypes.object).isRequired,
+};

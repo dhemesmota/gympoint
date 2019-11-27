@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '~/services/api';
 
 import Background from '~/styles/Background';
-import Header from '~/components/Header';
 import Button from '~/components/Button';
 import CheckIn from '~/components/CheckIn';
+
+import Header from '~/components/Header';
 
 import { Container, List } from './styles';
 
@@ -41,7 +41,6 @@ export default function Dashboard() {
 
   return (
     <Background>
-      <Header />
       <Container>
         <Button onPress={handleCheckIn}>Novo check-in</Button>
 
@@ -56,8 +55,5 @@ export default function Dashboard() {
 }
 
 Dashboard.navigationOptions = {
-  tabBarLabel: 'Check-ins',
-  tabBarIcon: ({ tintColor }) => (
-    <Icon name="check" size={20} color={tintColor} />
-  ),
+  headerTitle: <Header />,
 };

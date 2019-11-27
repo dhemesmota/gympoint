@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '~/services/api';
 
 import Background from '~/styles/Background';
-import Header from '~/components/Header';
 import Button from '~/components/Button';
 import Help from '~/components/Help';
 
 import { Container, ListHelp } from './styles';
+import logo from '~/assets/logo-vertical.png';
 
 export default function HelpOrder({ navigation }) {
   const [helpOrders, setHelpOrders] = useState([]);
@@ -27,7 +29,6 @@ export default function HelpOrder({ navigation }) {
 
   return (
     <Background>
-      <Header />
       <Container>
         <Button onPress={() => navigation.navigate('New')}>
           Novo pedido de auxílio
@@ -46,8 +47,16 @@ export default function HelpOrder({ navigation }) {
 }
 
 HelpOrder.navigationOptions = {
+  headerTitle: <Image source={logo} />,
   tabBarLabel: 'Pedir ajuda',
+  // eslint-disable-next-line react/prop-types
   tabBarIcon: ({ tintColor }) => (
-    <Icon name="help-outline" size={20} color="#666" />
+    <Icon name="help-outline" size={20} color={tintColor} />
   ),
+};
+
+HelpOrder.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+  }).isRequired,
 };
