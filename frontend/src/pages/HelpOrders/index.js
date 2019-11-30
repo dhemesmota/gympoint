@@ -11,6 +11,8 @@ import Header from '~/components/ContainerHeader';
 import ContainerBody from '~/components/ContainerBody';
 
 import Loading from '~/components/Loading';
+import CheckmarkLottie from '~/components/Animation/Checkmark';
+import ConfirmationLottie from '~/components/Animation/Confirmation';
 
 import { ContainerModal } from './styles';
 
@@ -36,6 +38,7 @@ export default function HelpOrders() {
   const [loading, setLoading] = useState(false);
   const [help, setHelp] = useState([]);
   const [open, setOpen] = useState(true);
+  const [animation, setAnimation] = useState(false);
 
   async function handleSubmit({ answer }) {
     try {
@@ -43,9 +46,13 @@ export default function HelpOrders() {
 
       setHelporders(helporders.filter(helporder => helporder.id !== help.id));
 
-      toast.success('Resposta enviada ao aluno.');
-
       setOpen(false);
+
+      setAnimation(true);
+      setTimeout(() => {
+        setAnimation(false);
+        toast.success('Resposta enviada com sucesso!');
+      }, 1000);
     } catch (err) {
       toast.error('Não foi possível responder a dúvida do aluno.');
     }
@@ -100,11 +107,27 @@ export default function HelpOrders() {
     showModal();
   }
 
+  console.tron.log(helporders.length);
+  if (helporders.length === 0) {
+    return (
+      <>
+        <Header>
+          <h1>Pedidos de auxílio</h1>
+        </Header>
+        <ContainerBody>
+          <ConfirmationLottie title="Nenhum pedido de auxílio pendente." />
+        </ContainerBody>
+      </>
+    );
+  }
+
   return (
     <>
       <Header>
         <h1>Pedidos de auxílio</h1>
       </Header>
+
+      {animation && <CheckmarkLottie />}
 
       <ContainerBody>
         {loading ? (

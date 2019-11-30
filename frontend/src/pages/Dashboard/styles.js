@@ -3,35 +3,34 @@ import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
-  flex-wrap: wrap;
   justify-content: flex-start;
 `;
 
 export const Card = styled(Link)`
-  height: 170px;
   width: 100%;
-  max-width: 320px;
-  min-width: 300px;
+  min-width: 240px;
+  max-width: 242px;
   padding: 10px;
   border-radius: 10px;
   border: 1px solid #f8f6fc;
-  box-shadow: 0 0 15px rgba(247, 246, 251, 0.8);
+  box-shadow: 0 0 4px rgba(247, 246, 251, 0.8);
   color: #2c2c34;
   transition: all 0.2s ease;
   margin-bottom: 10px;
   font-family: 'Roboto', sans-serif;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 
   &:hover {
-    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-color: #ececec;
   }
 
   .left {
-    width: 130px;
-    height: 100%;
+    width: 100%;
+    height: 90px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,9 +92,5 @@ export const Card = styled(Link)`
 
   & + & {
     margin-left: 10px;
-  }
-
-  &:last-child {
-    margin: 0;
   }
 `;
