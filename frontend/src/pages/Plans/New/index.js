@@ -9,10 +9,12 @@ import { toast } from 'react-toastify';
 
 import InputMask from 'react-input-mask';
 
+import api from '~/services/api';
+
 import Header from '~/components/ContainerHeader';
 import ContainerBodyForm from '~/components/ContainerBodyForm';
 
-import api from '~/services/api';
+import { formatPrice } from '~/util/format';
 
 const schema = Yup.object().shape({
   title: Yup.string().required('O título é obrigatório'),
@@ -40,14 +42,7 @@ export default function PlansNew({ history }) {
 
   useEffect(() => {
     if (duration && price) {
-      const total = duration * price;
-
-      setTotalPrice(
-        total.toLocaleString('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        })
-      );
+      setTotalPrice(formatPrice(duration * price));
     }
   }, [duration, price]);
 

@@ -54,6 +54,7 @@ export default createGlobalStyle`
 
   .react-datepicker {
     font-size: 1.1rem !important;
+    text-transform: capitalize;
   }
 
   .react-datepicker__current-month, .react-datepicker-time__header, .react-datepicker-year-header {

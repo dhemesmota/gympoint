@@ -17,6 +17,8 @@ import api from '~/services/api';
 import Select from '~/components/Select';
 import DatePicker from '~/components/DatePicker';
 
+import { formatPrice } from '~/util/format';
+
 const schema = Yup.object().shape({
   student_id: Yup.string().required('O aluno é obrigatório'),
   plan_id: Yup.string().required('O plano é obrigatório'),
@@ -78,12 +80,7 @@ export default function EnrollmentsNew({ history }) {
 
     setDuration(plan.duration);
 
-    setEndValue(
-      total.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      })
-    );
+    setEndValue(formatPrice(total));
   }
 
   function handleStartDate(date) {

@@ -14,6 +14,8 @@ import ContainerBodyForm from '~/components/ContainerBodyForm';
 
 import api from '~/services/api';
 
+import { formatPrice } from '~/util/format';
+
 const schema = Yup.object().shape({
   title: Yup.string().required('O título é obrigatório'),
   duration: Yup.string()
@@ -35,14 +37,7 @@ export default function PlansEdit({ history, match, location }) {
   const [price, setPrice] = useState();
 
   useEffect(() => {
-    const total = plan.duration * plan.price;
-
-    setTotalPrice(
-      total.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      })
-    );
+    setTotalPrice(formatPrice(plan.duration * plan.price));
     setDuration(plan.duration);
     setPrice(plan.price);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -61,14 +56,7 @@ export default function PlansEdit({ history, match, location }) {
 
   useEffect(() => {
     if (duration && price) {
-      const total = duration * price;
-
-      setTotalPrice(
-        total.toLocaleString('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        })
-      );
+      setTotalPrice(formatPrice(duration * price));
     }
   }, [duration, price]);
 

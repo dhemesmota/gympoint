@@ -107,7 +107,6 @@ export default function HelpOrders() {
     showModal();
   }
 
-  console.tron.log(helporders.length);
   if (helporders.length === 0) {
     return (
       <>

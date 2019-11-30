@@ -15,6 +15,8 @@ import Loading from '~/components/Loading';
 import Modal from '~/components/Modal';
 import Button from '~/styles/Button';
 
+import { formatPrice } from '~/util/format';
+
 export default function Plans({ history }) {
   const [plans, setPlans] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -34,10 +36,7 @@ export default function Plans({ history }) {
         duration_formated: `${
           plan.duration > 1 ? `${plan.duration} meses` : `${plan.duration} mês`
         }`,
-        price_formated: plan.price.toLocaleString('pt-BR', {
-          style: 'currency',
-          currency: 'BRL',
-        }),
+        price_formated: formatPrice(plan.price),
       }));
 
       setPlans(data);
