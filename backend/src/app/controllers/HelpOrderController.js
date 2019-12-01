@@ -7,7 +7,7 @@ class HelpOrderController {
     const { page = 1 } = req.query;
     const { studentId } = req.params;
 
-    const limit = 20;
+    const limit = 8;
 
     const student = await Student.findByPk(studentId);
 
@@ -15,12 +15,12 @@ class HelpOrderController {
       return res.status(400).json({ error: 'Student does not exists.' });
     }
 
-    const HelpOrders = await HelpOrder.findAll({
+    const helpOrders = await HelpOrder.findAndCountAll({
       where: { student_id: studentId },
       order: [['answer_at', 'desc'], ['created_at', 'desc']],
       limit,
       offset: (page - 1) * limit,
-      attributes: ['id', 'question', 'answer', 'answer_at'],
+      attributes: ['id', 'question', 'answer', 'answer_at', 'createdAt'],
       include: [
         {
           model: Student,
@@ -30,7 +30,12 @@ class HelpOrderController {
       ],
     });
 
-    return res.json(HelpOrders);
+    return res.json({
+      helpOrders: helpOrders.rows,
+      count: helpOrders.count,
+      page,
+      limit,
+    });
   }
 
   async store(req, res) {

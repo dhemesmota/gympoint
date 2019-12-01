@@ -11,7 +11,7 @@ class QuestionController {
 
     const limit = 20;
 
-    const HelpOrders = await HelpOrder.findAll({
+    const helpOrders = await HelpOrder.findAndCountAll({
       where: { answer_at: null },
       order: [['answer_at', 'desc'], ['created_at', 'desc']],
       limit,
@@ -26,7 +26,12 @@ class QuestionController {
       ],
     });
 
-    return res.json(HelpOrders);
+    return res.json({
+      helpOrders: helpOrders.rows,
+      count: helpOrders.count,
+      page,
+      limit,
+    });
   }
 
   async store(req, res) {
