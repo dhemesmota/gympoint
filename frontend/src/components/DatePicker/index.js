@@ -1,10 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import pt from 'date-fns/locale/pt';
 
 import { useField } from '@rocketseat/unform';
 
 import 'react-datepicker/dist/react-datepicker.css';
+import './styles.css';
 
 registerLocale('pt', pt);
 
@@ -40,3 +42,12 @@ export default function DatePicker({ name, label, ...rest }) {
     </>
   );
 }
+
+DatePicker.propTypes = {
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string,
+};
+
+DatePicker.defaultProps = {
+  label: null,
+};

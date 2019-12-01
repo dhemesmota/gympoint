@@ -51,13 +51,4 @@ export default createGlobalStyle`
   .Toastify__toast {
     border-radius: 0.4rem !important;
   }
-
-  .react-datepicker {
-    font-size: 1.1rem !important;
-    text-transform: capitalize;
-  }
-
-  .react-datepicker__current-month, .react-datepicker-time__header, .react-datepicker-year-header {
-    font-size: 1.3rem !important;
-  }
 `;
