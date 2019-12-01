@@ -1,9 +1,7 @@
 /* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { MdAdd } from 'react-icons/md';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
 
 import api from '~/services/api';
 
@@ -65,16 +63,7 @@ export default function Plans({ history }) {
 
   return (
     <>
-      <Header>
-        <h1>Gerenciando planos</h1>
-
-        <div>
-          <Link to="/plans/new" className="gymcolor">
-            <MdAdd color="#fff" size={20} />
-            CADASTRAR
-          </Link>
-        </div>
-      </Header>
+      <Header title="Gerenciando planos" buttonAdd="/plans/new" />
 
       <ContainerBody>
         {loading ? (

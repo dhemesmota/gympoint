@@ -1,10 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { format, addMonths } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import { Form } from '@rocketseat/unform';
 import * as Yup from 'yup';
@@ -21,7 +19,7 @@ import { formatPrice } from '~/util/format';
 const schema = Yup.object().shape({
   student_id: Yup.string().required('O aluno é obrigatório'),
   plan_id: Yup.string().required('O plano é obrigatório'),
-  start_date: Yup.date().required('A data de ínicio é obrigatória'),
+  start_date: Yup.string().required('A data de ínicio é obrigatória'),
 });
 
 export default function EnrollmentsNew({ history }) {
@@ -89,20 +87,11 @@ export default function EnrollmentsNew({ history }) {
   return (
     <>
       <Form schema={schema} onSubmit={handleSubmit}>
-        <Header>
-          <h1>Cadastro de matrícula</h1>
-
-          <div>
-            <Link to="/enrollments">
-              <MdKeyboardArrowLeft color="#fff" size={20} />
-              VOLTAR
-            </Link>
-            <button type="submit" className="gymcolor">
-              <MdCheck color="#fff" size={20} />
-              SALVAR
-            </button>
-          </div>
-        </Header>
+        <Header
+          title="Cadastro de matrícula"
+          buttonBack="/enrollments"
+          buttonSubmit
+        />
 
         <ContainerFormBody>
           <div className="row">

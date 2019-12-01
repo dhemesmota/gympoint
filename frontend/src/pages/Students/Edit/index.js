@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
@@ -47,20 +45,7 @@ export default function StudentsEdit({ history, match, location }) {
   return (
     <>
       <Form initialData={student} schema={schema} onSubmit={handleSubmit}>
-        <Header>
-          <h1>Edição de aluno</h1>
-
-          <div>
-            <Link to="/students">
-              <MdKeyboardArrowLeft color="#fff" size={20} />
-              VOLTAR
-            </Link>
-            <button type="submit" className="gymcolor">
-              <MdCheck color="#fff" size={20} />
-              SALVAR
-            </button>
-          </div>
-        </Header>
+        <Header title="Edição de aluno" buttonBack="/students" buttonSubmit />
 
         <ContainerFormBody>
           <Input

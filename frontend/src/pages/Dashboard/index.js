@@ -14,9 +14,7 @@ import IconEnrollment from '~/assets/icon-enrollment.svg';
 export default function Dashboard() {
   return (
     <>
-      <Header>
-        <h1>Dashboard</h1>
-      </Header>
+      <Header title="Dashboard" />
 
       <ContainerBody>
         <Container>

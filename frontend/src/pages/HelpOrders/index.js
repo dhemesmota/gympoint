@@ -110,9 +110,7 @@ export default function HelpOrders() {
   if (helporders.length === 0) {
     return (
       <>
-        <Header>
-          <h1>Pedidos de auxílio</h1>
-        </Header>
+        <Header title="Pedidos de auxílio" />
         <ContainerBody>
           <ConfirmationLottie title="Nenhum pedido de auxílio pendente." />
         </ContainerBody>
@@ -122,9 +120,7 @@ export default function HelpOrders() {
 
   return (
     <>
-      <Header>
-        <h1>Pedidos de auxílio</h1>
-      </Header>
+      <Header title="Pedidos de auxílio" />
 
       {animation && <CheckmarkLottie />}
 

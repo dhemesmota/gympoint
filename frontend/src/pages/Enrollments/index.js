@@ -1,10 +1,9 @@
 /* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { MdAdd, MdCheckCircle, MdBlock } from 'react-icons/md';
+import { MdCheckCircle, MdBlock } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 import api from '~/services/api';
@@ -86,16 +85,7 @@ export default function Enrollments({ history }) {
 
   return (
     <>
-      <Header>
-        <h1>Gerenciando matrículas</h1>
-
-        <div>
-          <Link to="/enrollments/new" className="gymcolor">
-            <MdAdd color="#fff" size={20} />
-            CADASTRAR
-          </Link>
-        </div>
-      </Header>
+      <Header title="Gerenciando matrículas" buttonAdd="/enrollments/new" />
 
       <ContainerBody>
         {loading ? (

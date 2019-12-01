@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
@@ -49,20 +47,7 @@ export default function PlansNew({ history }) {
   return (
     <>
       <Form schema={schema} onSubmit={handleSubmit}>
-        <Header>
-          <h1>Cadastro de plano</h1>
-
-          <div>
-            <Link to="/plans">
-              <MdKeyboardArrowLeft color="#fff" size={20} />
-              VOLTAR
-            </Link>
-            <button type="submit" className="gymcolor">
-              <MdCheck color="#fff" size={20} />
-              SALVAR
-            </button>
-          </div>
-        </Header>
+        <Header title="Cadastro de plano" buttonBack="/plans" buttonSubmit />
 
         <ContainerFormBody>
           <Input label="TÍTULO DO PLANO" name="title" type="text" />

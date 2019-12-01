@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { MdAdd, MdSearch } from 'react-icons/md';
+import { MdSearch } from 'react-icons/md';
 import { Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 
@@ -70,31 +69,19 @@ export default function Students({ history }) {
 
   return (
     <>
-      <Header>
-        <h1>Gerenciando alunos</h1>
-
-        <div>
-          <Link to="/students/new" className="gymcolor">
-            <MdAdd color="#fff" size={20} />
-            CADASTRAR
-          </Link>
-          <span>
-            <Input
-              label={
-                <MdSearch
-                  color="#999"
-                  size={20}
-                  onClick={() => handleFilter()}
-                />
-              }
-              name="search"
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              type="text"
-              placeholder="Buscar aluno"
-            />
-          </span>
-        </div>
+      <Header title="Gerenciando alunos" buttonAdd="/students/new">
+        <span>
+          <Input
+            label={
+              <MdSearch color="#999" size={20} onClick={() => handleFilter()} />
+            }
+            name="search"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            type="text"
+            placeholder="Buscar aluno"
+          />
+        </span>
       </Header>
 
       <ContainerBody>

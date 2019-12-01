@@ -1,10 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { format, addMonths } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { MdKeyboardArrowLeft, MdCheck } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import { Form } from '@rocketseat/unform';
 import * as Yup from 'yup';
@@ -86,20 +84,11 @@ export default function EnrollmentsEdit({ history, match, location }) {
   return (
     <>
       <Form schema={schema} onSubmit={handleSubmit}>
-        <Header>
-          <h1>Edição de matrícula</h1>
-
-          <div>
-            <Link to="/enrollments">
-              <MdKeyboardArrowLeft color="#fff" size={20} />
-              VOLTAR
-            </Link>
-            <button type="submit" className="gymcolor">
-              <MdCheck color="#fff" size={20} />
-              SALVAR
-            </button>
-          </div>
-        </Header>
+        <Header
+          title="Edição de matrícula"
+          buttonBack="/enrollments"
+          buttonSubmit
+        />
 
         <ContainerFormBody>
           <div className="row">
