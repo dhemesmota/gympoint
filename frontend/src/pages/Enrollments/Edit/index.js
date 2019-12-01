@@ -10,7 +10,7 @@ import { Form } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
 import Header from '~/components/ContainerHeader';
-import ContainerBodyForm from '~/components/ContainerBodyForm';
+import ContainerFormBody from '~/styles/ContainerFormBody';
 
 import api from '~/services/api';
 
@@ -101,7 +101,7 @@ export default function EnrollmentsEdit({ history, match, location }) {
           </div>
         </Header>
 
-        <ContainerBodyForm>
+        <ContainerFormBody>
           <div className="row">
             <div className="input-group">
               <label htmlFor="student_id">ALUNO</label>
@@ -145,7 +145,7 @@ export default function EnrollmentsEdit({ history, match, location }) {
               <input id="end_value" value={endValue} type="text" disabled />
             </div>
           </div>
-        </ContainerBodyForm>
+        </ContainerFormBody>
       </Form>
     </>
   );

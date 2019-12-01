@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import InputMask from 'react-input-mask';
 
 import Header from '~/components/ContainerHeader';
-import ContainerBodyForm from '~/components/ContainerBodyForm';
+import ContainerFormBody from '~/styles/ContainerFormBody';
 
 import api from '~/services/api';
 
@@ -55,7 +55,7 @@ export default function StudentsNew({ history }) {
           </div>
         </Header>
 
-        <ContainerBodyForm>
+        <ContainerFormBody>
           <Input
             label="NOME COMPLETO"
             name="name"
@@ -89,7 +89,7 @@ export default function StudentsNew({ history }) {
               </InputMask>
             </div>
           </div>
-        </ContainerBodyForm>
+        </ContainerFormBody>
       </Form>
     </>
   );

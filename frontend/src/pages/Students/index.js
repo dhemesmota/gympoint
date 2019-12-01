@@ -6,11 +6,11 @@ import { Input } from '@rocketseat/unform';
 import { toast } from 'react-toastify';
 
 import Header from '~/components/ContainerHeader';
-import ContainerBody from '~/components/ContainerBody';
+import ContainerBody from '~/styles/ContainerBody';
 
 import api from '~/services/api';
 
-import Loading from '~/components/Loading';
+import Loading from '~/components/Animation/Loading';
 import Pagination from '~/components/Pagination';
 
 import Modal from '~/components/Modal';
@@ -142,14 +142,14 @@ export default function Students({ history }) {
                   ))}
               </tbody>
             </table>
+            <Pagination
+              total={totalItems}
+              page={page}
+              limit={limitItems}
+              selectPg={handlePage}
+            />
           </>
         )}
-        <Pagination
-          total={totalItems}
-          page={page}
-          limit={limitItems}
-          selectPg={handlePage}
-        />
       </ContainerBody>
 
       {modal.open && (

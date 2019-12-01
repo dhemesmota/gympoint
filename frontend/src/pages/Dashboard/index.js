@@ -4,7 +4,7 @@ import { MdArrowForward } from 'react-icons/md';
 import { Container, Card } from './styles';
 
 import Header from '~/components/ContainerHeader';
-import ContainerBody from '~/components/ContainerBody';
+import ContainerBody from '~/styles/ContainerBody';
 
 import IconStudent from '~/assets/icon-student.svg';
 import IconPlan from '~/assets/icon-plan.svg';

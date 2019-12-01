@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import InputMask from 'react-input-mask';
 
 import Header from '~/components/ContainerHeader';
-import ContainerBodyForm from '~/components/ContainerBodyForm';
+import ContainerFormBody from '~/styles/ContainerFormBody';
 
 import api from '~/services/api';
 
@@ -78,7 +78,7 @@ export default function PlansEdit({ history, match, location }) {
           </div>
         </Header>
 
-        <ContainerBodyForm>
+        <ContainerFormBody>
           <Input label="TÍTULO DO PLANO" name="title" type="text" />
 
           <div className="row">
@@ -110,7 +110,7 @@ export default function PlansEdit({ history, match, location }) {
               <input id="total" value={totalPrice} type="text" disabled />
             </div>
           </div>
-        </ContainerBodyForm>
+        </ContainerFormBody>
       </Form>
     </>
   );

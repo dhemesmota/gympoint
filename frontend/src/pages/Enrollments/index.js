@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 import api from '~/services/api';
 
 import Header from '~/components/ContainerHeader';
-import ContainerBody from '~/components/ContainerBody';
+import ContainerBody from '~/styles/ContainerBody';
 
 import Loading from '~/components/Loading';
 import Pagination from '~/components/Pagination';

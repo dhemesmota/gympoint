@@ -10,13 +10,12 @@ import { Form } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
 import Header from '~/components/ContainerHeader';
-import ContainerBodyForm from '~/components/ContainerBodyForm';
+import ContainerFormBody from '~/styles/ContainerFormBody';
 
 import api from '~/services/api';
 
 import Select from '~/components/Select';
 import DatePicker from '~/components/DatePicker';
-
 import { formatPrice } from '~/util/format';
 
 const schema = Yup.object().shape({
@@ -105,7 +104,7 @@ export default function EnrollmentsNew({ history }) {
           </div>
         </Header>
 
-        <ContainerBodyForm>
+        <ContainerFormBody>
           <div className="row">
             <div className="input-group">
               <Select
@@ -150,7 +149,7 @@ export default function EnrollmentsNew({ history }) {
               <input id="end_value" value={endValue} type="text" disabled />
             </div>
           </div>
-        </ContainerBodyForm>
+        </ContainerFormBody>
       </Form>
     </>
   );
