@@ -1,10 +1,10 @@
 import React from 'react';
-import { MdArrowForward } from 'react-icons/md';
 
-import { Container, Card } from './styles';
+import { Container } from './styles';
 
 import Header from '~/components/ContainerHeader';
 import ContainerBody from '~/styles/ContainerBody';
+import Card from '~/components/Card/CardDashboard';
 
 import IconStudent from '~/assets/icon-student.svg';
 import IconPlan from '~/assets/icon-plan.svg';
@@ -18,69 +18,14 @@ export default function Dashboard() {
 
       <ContainerBody>
         <Container>
-          <Card to="/students">
-            <div className="left">
-              <span>
-                <img src={IconStudent} alt="IconStudent" />
-              </span>
-            </div>
-
-            <div className="right">
-              <h1>ALUNOS</h1>
-              <span>Gerenciar alunos</span>
-              <small>
-                Listar <MdArrowForward size={16} color="#000" />
-              </small>
-            </div>
-          </Card>
-
-          <Card to="/plans">
-            <div className="left">
-              <span>
-                <img src={IconPlan} alt="IconPlan" />
-              </span>
-            </div>
-
-            <div className="right">
-              <h1>PLANOS</h1>
-              <span>Gerenciar planos</span>
-              <small>
-                Listar <MdArrowForward size={16} color="#000" />
-              </small>
-            </div>
-          </Card>
-
-          <Card to="/enrollments">
-            <div className="left">
-              <span>
-                <img src={IconEnrollment} alt="IconEnrollment" />
-              </span>
-            </div>
-
-            <div className="right">
-              <h1>MATRÍCULAS</h1>
-              <span>Gerenciar matrículas</span>
-              <small>
-                Listar <MdArrowForward size={16} color="#000" />
-              </small>
-            </div>
-          </Card>
-
-          <Card to="/help-orders">
-            <div className="left">
-              <span>
-                <img src={IconHelp} alt="IconHelp" />
-              </span>
-            </div>
-
-            <div className="right">
-              <h1>PEDIDOS DE AUXÍLIO</h1>
-              <span>Gerenciar pedidos de auxílio</span>
-              <small>
-                Listar <MdArrowForward size={16} color="#000" />
-              </small>
-            </div>
-          </Card>
+          <Card link="/students" image={IconStudent} title="Alunos" />
+          <Card link="/plans" image={IconPlan} title="Planos" />
+          <Card link="/enrollments" image={IconEnrollment} title="Matrículas" />
+          <Card
+            link="/help-orders"
+            image={IconHelp}
+            title="Pedidos de auxílio"
+          />
         </Container>
       </ContainerBody>
     </>
