@@ -28,7 +28,7 @@ export default (signedIn = false) =>
               navigationOptions: {
                 tabBarLabel: 'Check-ins',
                 tabBarIcon: ({ tintColor }) => (
-                  <Icon name="check" size={20} color={tintColor} />
+                  <Icon name="today" size={20} color={tintColor} />
                 ),
               },
             },
@@ -39,7 +39,9 @@ export default (signedIn = false) =>
                   Answer,
                   New,
                 },
-                { headerLayoutPreset: 'center' },
+                {
+                  headerLayoutPreset: 'center',
+                },
               ),
               navigationOptions: {
                 tabBarLabel: 'Pedir ajuda',
