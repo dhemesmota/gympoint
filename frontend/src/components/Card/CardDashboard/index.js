@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { MdArrowForward } from 'react-icons/md';
 
 import { Card } from './styles';
@@ -24,3 +25,9 @@ export default function CardDashboard({ link, image, title }) {
     </Card>
   );
 }
+
+CardDashboard.propTypes = {
+  link: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+};
