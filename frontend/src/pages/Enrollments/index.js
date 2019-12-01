@@ -12,7 +12,7 @@ import api from '~/services/api';
 import Header from '~/components/ContainerHeader';
 import ContainerBody from '~/styles/ContainerBody';
 
-import Loading from '~/components/Loading';
+import Loading from '~/components/Animation/Loading';
 import Pagination from '~/components/Pagination';
 
 import Modal from '~/components/Modal';

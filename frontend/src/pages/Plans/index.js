@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 import api from '~/services/api';
 
 import Header from '~/components/ContainerHeader';
-import ContainerBody from '~/components/ContainerBody';
+import ContainerBody from '~/styles/ContainerBody';
 
-import Loading from '~/components/Loading';
+import Loading from '~/components/Animation/Loading';
 
 import Modal from '~/components/Modal';
 import Button from '~/styles/Button';
