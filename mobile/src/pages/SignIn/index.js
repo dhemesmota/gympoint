@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image } from 'react-native';
+import { Image, Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { signInRequest } from '~/store/modules/auth/actions';
@@ -15,7 +15,14 @@ export default function SignIn() {
   const loading = useSelector(state => state.auth.loading);
 
   function handleSubmit() {
-    dispatch(signInRequest(studentId));
+    if (studentId) {
+      dispatch(signInRequest(studentId));
+    } else {
+      Alert.alert(
+        'Ooops!',
+        'Informe o seu ID de cadastro para acessar o aplicativo.',
+      );
+    }
   }
 
   return (
