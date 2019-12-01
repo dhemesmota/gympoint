@@ -10,7 +10,6 @@ export function* signIn({ payload }) {
     const { studentId } = payload;
 
     const response = yield call(api.get, `students/sessions/${studentId}`);
-    console.tron.warn(response);
 
     yield put(signInSuccess(response.data.id));
 
