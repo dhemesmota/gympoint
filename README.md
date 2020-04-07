@@ -17,7 +17,6 @@
 </p>
 
 <h4 align="center">Aplicativo gerenciador de academia</h4>
-<p align="center">:construction: Em desenvolvimento.</p>
 
 
 <p align="center">
